@@ -6,6 +6,7 @@ RobotData::RobotData() : encoderValues(NUM_ENCODERS), irValues(NUM_IR_SENSORS), 
     //Empty Constructor
 }
 
+//Parses a formatted string into sensor data objects
 void RobotData::ParseString(QString data) {
     if (data.size() == 0) return;
 
@@ -26,12 +27,14 @@ void RobotData::ParseString(QString data) {
     }
 }
 
+//Parses a single part of a formatted string into the provided vector
 void RobotData::ParseSingleData(string currentLine, vector<int>& array) {
     int sensorNum = currentLine.at(1) - '0' - 1;
     int value = atoi(currentLine.substr(3).c_str());
     array.at(sensorNum) = value;
 }
 
+//Decides what to do with a given line of a string with data input values
 void RobotData::InterpretDataType(string currentLine) {
     if (currentLine.empty())
         return;
@@ -59,6 +62,7 @@ void RobotData::InterpretDataType(string currentLine) {
     }
 }
 
+//Prints the values in the encoder, ir, and imu vectors
 void RobotData::Print(ostream& out) {
     out << "E - ";
     for (size_t i = 0; i < encoderValues.size(); i++) out << encoderValues.at(i) << " ";

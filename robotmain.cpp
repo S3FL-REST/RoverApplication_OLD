@@ -11,7 +11,7 @@ RobotMain::RobotMain(string port) : robotData(), serialWorker(port), timer(this)
 }
 
 void RobotMain::RecievedData(QString data) {
-    if (!data.isEmpty()) cout << data.toStdString() << endl;
+    //if (!data.isEmpty()) cout << data.toStdString() << endl;
     robotData.ParseString(data);
 }
 

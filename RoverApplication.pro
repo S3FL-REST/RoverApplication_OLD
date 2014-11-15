@@ -19,13 +19,17 @@ SOURCES += main.cpp \
     Rover/robotdata.cpp \
     Rover/serialconnection.cpp \
     Rover/serialworker.cpp \
-    robotmain.cpp
+    robotmain.cpp \
+    Network/networkclient.cpp \
+    Network/networkdata.cpp
 
 HEADERS += \
     Rover/robotdata.h \
     Rover/serialconnection.h \
     Rover/serialworker.h \
     Rover/robotmain.h \
-    robotmain.h
+    robotmain.h \
+    Network/networkclient.h \
+    Network/networkdata.h
 
 unix:!macx: LIBS += -lserial

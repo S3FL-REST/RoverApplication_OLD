@@ -3,12 +3,13 @@
 
 #include <QObject>
 #include <QTimer>
+#include <QString>
+#include <QCoreApplication>
 
 #include <QDebug>
 #include <QThread>
 
 #include <string>
-#include <QString>
 
 #include "serialconnection.h"
 
@@ -19,7 +20,6 @@ class SerialWorker : public QObject
     Q_OBJECT
 public:
     SerialWorker(string);
-    void moveToThread(QThread *thread);
     bool IsConnected();
     ~SerialWorker();
 
@@ -45,6 +45,7 @@ public slots:
 private slots:
     void Start();
     void Stop();
+    void StopThread();
 };
 
 #endif // SERIALWORKER_H

@@ -33,7 +33,7 @@ private:
 
     int currentLostCount;
 
-    static int MAX_LOST_COUNT;
+    static const int MAX_LOST_COUNT;
 
 signals:
 

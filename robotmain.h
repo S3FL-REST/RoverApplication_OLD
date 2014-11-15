@@ -30,13 +30,13 @@ private:
 
     void SetMotorSpeeds(int, int);
 
+
 signals:
     void SendData(QString);
 
 private slots:
     void RecievedData(QString);
     void RunLoop();
-    void SendTest();
 };
 
 #endif // ROBOTMAIN_H

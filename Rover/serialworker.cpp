@@ -5,14 +5,13 @@ SerialWorker::SerialWorker(string port) : serialCon(), timer(this), port(port) {
 
     connect(this, SIGNAL(SendDataToSerial(QString)), &serialCon, SLOT(SendData(QString)));
 
+    connect(QCoreApplication::instance(), SIGNAL(aboutToQuit()), this, SLOT(StopThread()));
+
+    //Create a new thread and move this and the serial connection object to that thread
     mThread = new QThread;
     moveToThread(mThread);
+    serialCon.moveToThread(mThread);
     mThread->start();
-}
-
-void SerialWorker::moveToThread(QThread *thread) {
-    QObject::moveToThread(thread);
-    serialCon.moveToThread(thread);
 }
 
 void SerialWorker::Start() {
@@ -54,6 +53,11 @@ bool SerialWorker::IsConnected() {
 void SerialWorker::Stop() {
     serialCon.Close();
     if (timer.isActive()) timer.stop();
+}
+
+void SerialWorker::StopThread() {
+    StopWorker(this);
+    mThread->quit();
 }
 
 void SerialWorker::StopWorker(SerialWorker* worker) {
