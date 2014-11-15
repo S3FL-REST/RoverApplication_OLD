@@ -8,9 +8,12 @@ SerialWorker::SerialWorker(string port) : serialCon(), timer(this), port(port) {
     connect(QCoreApplication::instance(), SIGNAL(aboutToQuit()), this, SLOT(StopThread()));
 
     //Create a new thread and move this and the serial connection object to that thread
-    mThread = new QThread;
+    mThread = new QThread(this);
     moveToThread(mThread);
     serialCon.moveToThread(mThread);
+
+    connect(mThread, SIGNAL(finished()), mThread, SLOT(deleteLater()));
+
     mThread->start();
 }
 
@@ -35,7 +38,7 @@ void SerialWorker::GetData() {
             if (0 == access(port.c_str(), 0)) {
                 serialCon.Connect(port);
             } else {
-                qDebug() << "Connection Lost";
+                qDebug() << "Serial Connection Lost";
                 usleep(1000000);
             }
         }

@@ -10,6 +10,8 @@
 #include "Rover/serialworker.h"
 #include "Rover/robotdata.h"
 
+#include "Network/networkclient.h"
+
 #include <iostream>
 
 using namespace std;
@@ -26,6 +28,9 @@ public:
 private:
     RobotData robotData;
     SerialWorker serialWorker;
+
+    NetworkClient networkClient;
+
     QTimer timer;
 
     void SetMotorSpeeds(int, int);

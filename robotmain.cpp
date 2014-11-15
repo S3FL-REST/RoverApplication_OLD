@@ -1,6 +1,7 @@
 #include "robotmain.h"
 
-RobotMain::RobotMain(string port) : robotData(), serialWorker(port), timer(this) {
+RobotMain::RobotMain(string serial_port) : robotData(), serialWorker(serial_port), networkClient(), timer(this) {
+
     connect(this, SIGNAL(SendData(QString)), &serialWorker, SLOT(SendData(QString)));
     connect(&serialWorker, SIGNAL(ReceivedData(QString)), this, SLOT(RecievedData(QString)));
 
