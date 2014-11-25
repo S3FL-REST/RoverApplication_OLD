@@ -14,6 +14,9 @@ public:
 
     RunMode GetCurrentRunMode();
 
+public slots:
+     void ParseDataString(QString);
+
 private:
     RunMode currentRunMode;
 };

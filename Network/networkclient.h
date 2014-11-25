@@ -23,6 +23,7 @@ private:
     static const int port;
 
 signals:
+    void DataReceived(QString);
 
 public slots:
     void NewConnection();

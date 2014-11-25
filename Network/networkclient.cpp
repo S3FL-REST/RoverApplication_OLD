@@ -31,8 +31,11 @@ void NetworkClient::SocketDisconnected() {
 }
 
 void NetworkClient::DataReady() {
+    QString data = "";
+
     while (socket->bytesAvailable()) {
-        socket->readAll();
-        QString data = socket->readAll();
+        data += socket->readAll();
     }
+
+    emit DataReceived(data);
 }

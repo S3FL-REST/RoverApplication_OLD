@@ -7,3 +7,7 @@ NetworkData::NetworkData() : currentRunMode(NetworkData::NONE) {
 NetworkData::RunMode NetworkData::GetCurrentRunMode() {
     return currentRunMode;
 }
+
+void NetworkData::ParseDataString(QString) {
+
+}

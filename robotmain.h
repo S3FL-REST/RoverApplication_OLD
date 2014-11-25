@@ -11,6 +11,7 @@
 #include "Rover/robotdata.h"
 
 #include "Network/networkclient.h"
+#include "Network/networkdata.h"
 
 #include <iostream>
 
@@ -27,9 +28,10 @@ public:
 
 private:
     RobotData robotData;
-    SerialWorker serialWorker;
+    SerialWorker robotSerial;
 
     NetworkClient networkClient;
+    NetworkData networkData;
 
     QTimer timer;
 
