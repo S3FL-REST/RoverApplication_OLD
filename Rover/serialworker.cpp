@@ -38,7 +38,7 @@ void SerialWorker::GetData() {
             if (0 == access(port.c_str(), 0)) {
                 serialCon.Connect(port);
             } else {
-                qDebug() << "Serial Connection Lost";
+                //qDebug() << "Serial Connection Lost";
                 usleep(1000000);
             }
         }

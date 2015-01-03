@@ -9,6 +9,10 @@
 
 #include <QDebug>
 
+#include "Protocols/rest_network.pb.h"
+
+using namespace rest_network;
+
 class NetworkClient : public QObject
 {
     Q_OBJECT
@@ -23,7 +27,7 @@ private:
     static const int port;
 
 signals:
-    void DataReceived(QString);
+    void DataReceived(QByteArray);
 
 public slots:
     void NewConnection();

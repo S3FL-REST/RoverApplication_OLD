@@ -7,7 +7,7 @@ RobotMain::RobotMain(string serial_port) : robotData(), robotSerial(serial_port)
     connect(&robotSerial, SIGNAL(ReceivedData(QString)), this, SLOT(RecievedData(QString)));
 
     //Connect signals and slots for network
-    connect(&networkClient, SIGNAL(DataReceived(QString)), &networkData, SLOT(ParseDataString(QString)));
+    connect(&networkClient, SIGNAL(DataReceived(QByteArray)), &networkData, SLOT(ParseDataString(QByteArray)));
 
     //Start the robotSerial thread
     SerialWorker::StartWorker(&robotSerial);

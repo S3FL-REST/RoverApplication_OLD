@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     Rover/serialworker.cpp \
     robotmain.cpp \
     Network/networkclient.cpp \
-    Network/networkdata.cpp
+    Network/networkdata.cpp \
+    Protocols/rest_network.pb.cc
 
 HEADERS += \
     Rover/robotdata.h \
@@ -30,6 +31,8 @@ HEADERS += \
     Rover/robotmain.h \
     robotmain.h \
     Network/networkclient.h \
-    Network/networkdata.h
+    Network/networkdata.h \
+    Protocols/rest_network.pb.h
 
 unix:!macx: LIBS += -lserial
+unix:!macx: LIBS += -lprotobuf

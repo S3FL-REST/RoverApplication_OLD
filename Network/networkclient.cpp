@@ -20,6 +20,7 @@ void NetworkClient::NewConnection() {
 
         connect(socket, SIGNAL(readyRead()), this, SLOT(DataReady()));
         connect(socket, SIGNAL(disconnected()), this, SLOT(SocketDisconnected()));
+        connect(socket, SIGNAL(disconnected()), socket, SLOT(deleteLater()));
     } else {
         qDebug() << "Server Already Connected";
     }
@@ -31,7 +32,7 @@ void NetworkClient::SocketDisconnected() {
 }
 
 void NetworkClient::DataReady() {
-    QString data = "";
+    QByteArray data = "";
 
     while (socket->bytesAvailable()) {
         data += socket->readAll();

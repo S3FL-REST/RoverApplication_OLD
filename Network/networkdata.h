@@ -2,6 +2,9 @@
 #define NETWORKDATA_H
 
 #include <QObject>
+#include "Protocols/rest_network.pb.h"
+
+using namespace rest_network;
 
 class NetworkData : public QObject
 {
@@ -15,7 +18,7 @@ public:
     RunMode GetCurrentRunMode();
 
 public slots:
-     void ParseDataString(QString);
+     void ParseDataString(QByteArray);
 
 private:
     RunMode currentRunMode;
