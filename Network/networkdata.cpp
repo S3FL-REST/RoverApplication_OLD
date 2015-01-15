@@ -14,5 +14,5 @@ void NetworkData::ParseDataString(QByteArray data) {
     ControlNetworkData controlData;
     controlData.ParseFromArray(data, data.length());
 
-    qDebug() << controlData.left() << ", " << (int) controlData.right() << ", " << controlData.mode();
+    qDebug() << controlData.left() << ", " << controlData.right() << ", " << controlData.mode();
 }

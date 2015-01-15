@@ -23,6 +23,10 @@ namespace {
 const ::google::protobuf::Descriptor* ControlNetworkData_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ControlNetworkData_reflection_ = NULL;
+const ::google::protobuf::Descriptor* Telemetry_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  Telemetry_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* run_mode_descriptor_ = NULL;
 
 }  // namespace
 
@@ -50,6 +54,24 @@ void protobuf_AssignDesc_rest_5fnetwork_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ControlNetworkData));
+  Telemetry_descriptor_ = file->message_type(1);
+  static const int Telemetry_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Telemetry, left_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Telemetry, right_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Telemetry, mode_),
+  };
+  Telemetry_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      Telemetry_descriptor_,
+      Telemetry::default_instance_,
+      Telemetry_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Telemetry, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Telemetry, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(Telemetry));
+  run_mode_descriptor_ = file->enum_type(0);
 }
 
 namespace {
@@ -64,6 +86,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ControlNetworkData_descriptor_, &ControlNetworkData::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    Telemetry_descriptor_, &Telemetry::default_instance());
 }
 
 }  // namespace
@@ -71,6 +95,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void protobuf_ShutdownFile_rest_5fnetwork_2eproto() {
   delete ControlNetworkData::default_instance_;
   delete ControlNetworkData_reflection_;
+  delete Telemetry::default_instance_;
+  delete Telemetry_reflection_;
 }
 
 void protobuf_AddDesc_rest_5fnetwork_2eproto() {
@@ -80,13 +106,20 @@ void protobuf_AddDesc_rest_5fnetwork_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022rest_network.proto\022\014rest_network\"\?\n\022Co"
-    "ntrolNetworkData\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030"
-    "\002 \002(\021\022\014\n\004mode\030\003 \002(\005", 99);
+    "\n\022rest_network.proto\022\014rest_network\"c\n\022Co"
+    "ntrolNetworkData\022\017\n\004left\030\001 \002(\021:\0010\022\020\n\005rig"
+    "ht\030\002 \002(\021:\0010\022*\n\004mode\030\003 \002(\0162\026.rest_network"
+    ".run_mode:\004STOP\"N\n\tTelemetry\022\014\n\004left\030\001 \002"
+    "(\021\022\r\n\005right\030\002 \002(\021\022$\n\004mode\030\003 \002(\0162\026.rest_n"
+    "etwork.run_mode*@\n\010run_mode\022\010\n\004STOP\020\000\022\n\n"
+    "\006TELEOP\020\001\022\016\n\nSAFE_AUTON\020\002\022\016\n\nFULL_AUTON\020"
+    "\003", 281);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "rest_network.proto", &protobuf_RegisterTypes);
   ControlNetworkData::default_instance_ = new ControlNetworkData();
+  Telemetry::default_instance_ = new Telemetry();
   ControlNetworkData::default_instance_->InitAsDefaultInstance();
+  Telemetry::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_rest_5fnetwork_2eproto);
 }
 
@@ -96,6 +129,22 @@ struct StaticDescriptorInitializer_rest_5fnetwork_2eproto {
     protobuf_AddDesc_rest_5fnetwork_2eproto();
   }
 } static_descriptor_initializer_rest_5fnetwork_2eproto_;
+const ::google::protobuf::EnumDescriptor* run_mode_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return run_mode_descriptor_;
+}
+bool run_mode_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
 
 // ===================================================================
 
@@ -190,7 +239,7 @@ bool ControlNetworkData::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required sint32 left = 1;
+      // required sint32 left = 1 [default = 0];
       case 1: {
         if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
@@ -204,7 +253,7 @@ bool ControlNetworkData::MergePartialFromCodedStream(
         break;
       }
 
-      // required sint32 right = 2;
+      // required sint32 right = 2 [default = 0];
       case 2: {
         if (tag == 16) {
          parse_right:
@@ -219,14 +268,19 @@ bool ControlNetworkData::MergePartialFromCodedStream(
         break;
       }
 
-      // required int32 mode = 3;
+      // required .rest_network.run_mode mode = 3 [default = STOP];
       case 3: {
         if (tag == 24) {
          parse_mode:
+          int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &mode_)));
-          set_has_mode();
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::rest_network::run_mode_IsValid(value)) {
+            set_mode(static_cast< ::rest_network::run_mode >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(3, value);
+          }
         } else {
           goto handle_unusual;
         }
@@ -259,19 +313,20 @@ failure:
 void ControlNetworkData::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:rest_network.ControlNetworkData)
-  // required sint32 left = 1;
+  // required sint32 left = 1 [default = 0];
   if (has_left()) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt32(1, this->left(), output);
   }
 
-  // required sint32 right = 2;
+  // required sint32 right = 2 [default = 0];
   if (has_right()) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt32(2, this->right(), output);
   }
 
-  // required int32 mode = 3;
+  // required .rest_network.run_mode mode = 3 [default = STOP];
   if (has_mode()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->mode(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      3, this->mode(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -284,19 +339,20 @@ void ControlNetworkData::SerializeWithCachedSizes(
 ::google::protobuf::uint8* ControlNetworkData::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:rest_network.ControlNetworkData)
-  // required sint32 left = 1;
+  // required sint32 left = 1 [default = 0];
   if (has_left()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(1, this->left(), target);
   }
 
-  // required sint32 right = 2;
+  // required sint32 right = 2 [default = 0];
   if (has_right()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(2, this->right(), target);
   }
 
-  // required int32 mode = 3;
+  // required .rest_network.run_mode mode = 3 [default = STOP];
   if (has_mode()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->mode(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      3, this->mode(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -311,25 +367,24 @@ int ControlNetworkData::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required sint32 left = 1;
+    // required sint32 left = 1 [default = 0];
     if (has_left()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::SInt32Size(
           this->left());
     }
 
-    // required sint32 right = 2;
+    // required sint32 right = 2 [default = 0];
     if (has_right()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::SInt32Size(
           this->right());
     }
 
-    // required int32 mode = 3;
+    // required .rest_network.run_mode mode = 3 [default = STOP];
     if (has_mode()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->mode());
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->mode());
     }
 
   }
@@ -406,6 +461,325 @@ void ControlNetworkData::Swap(ControlNetworkData* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = ControlNetworkData_descriptor_;
   metadata.reflection = ControlNetworkData_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int Telemetry::kLeftFieldNumber;
+const int Telemetry::kRightFieldNumber;
+const int Telemetry::kModeFieldNumber;
+#endif  // !_MSC_VER
+
+Telemetry::Telemetry()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:rest_network.Telemetry)
+}
+
+void Telemetry::InitAsDefaultInstance() {
+}
+
+Telemetry::Telemetry(const Telemetry& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:rest_network.Telemetry)
+}
+
+void Telemetry::SharedCtor() {
+  _cached_size_ = 0;
+  left_ = 0;
+  right_ = 0;
+  mode_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+Telemetry::~Telemetry() {
+  // @@protoc_insertion_point(destructor:rest_network.Telemetry)
+  SharedDtor();
+}
+
+void Telemetry::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void Telemetry::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* Telemetry::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return Telemetry_descriptor_;
+}
+
+const Telemetry& Telemetry::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_rest_5fnetwork_2eproto();
+  return *default_instance_;
+}
+
+Telemetry* Telemetry::default_instance_ = NULL;
+
+Telemetry* Telemetry::New() const {
+  return new Telemetry;
+}
+
+void Telemetry::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<Telemetry*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  ZR_(left_, mode_);
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool Telemetry::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:rest_network.Telemetry)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required sint32 left = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
+                 input, &left_)));
+          set_has_left();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_right;
+        break;
+      }
+
+      // required sint32 right = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_right:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
+                 input, &right_)));
+          set_has_right();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_mode;
+        break;
+      }
+
+      // required .rest_network.run_mode mode = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_mode:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::rest_network::run_mode_IsValid(value)) {
+            set_mode(static_cast< ::rest_network::run_mode >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(3, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:rest_network.Telemetry)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:rest_network.Telemetry)
+  return false;
+#undef DO_
+}
+
+void Telemetry::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:rest_network.Telemetry)
+  // required sint32 left = 1;
+  if (has_left()) {
+    ::google::protobuf::internal::WireFormatLite::WriteSInt32(1, this->left(), output);
+  }
+
+  // required sint32 right = 2;
+  if (has_right()) {
+    ::google::protobuf::internal::WireFormatLite::WriteSInt32(2, this->right(), output);
+  }
+
+  // required .rest_network.run_mode mode = 3;
+  if (has_mode()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      3, this->mode(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:rest_network.Telemetry)
+}
+
+::google::protobuf::uint8* Telemetry::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:rest_network.Telemetry)
+  // required sint32 left = 1;
+  if (has_left()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(1, this->left(), target);
+  }
+
+  // required sint32 right = 2;
+  if (has_right()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(2, this->right(), target);
+  }
+
+  // required .rest_network.run_mode mode = 3;
+  if (has_mode()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      3, this->mode(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:rest_network.Telemetry)
+  return target;
+}
+
+int Telemetry::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required sint32 left = 1;
+    if (has_left()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::SInt32Size(
+          this->left());
+    }
+
+    // required sint32 right = 2;
+    if (has_right()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::SInt32Size(
+          this->right());
+    }
+
+    // required .rest_network.run_mode mode = 3;
+    if (has_mode()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->mode());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void Telemetry::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const Telemetry* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const Telemetry*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void Telemetry::MergeFrom(const Telemetry& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_left()) {
+      set_left(from.left());
+    }
+    if (from.has_right()) {
+      set_right(from.right());
+    }
+    if (from.has_mode()) {
+      set_mode(from.mode());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void Telemetry::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void Telemetry::CopyFrom(const Telemetry& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Telemetry::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+
+  return true;
+}
+
+void Telemetry::Swap(Telemetry* other) {
+  if (other != this) {
+    std::swap(left_, other->left_);
+    std::swap(right_, other->right_);
+    std::swap(mode_, other->mode_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata Telemetry::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = Telemetry_descriptor_;
+  metadata.reflection = Telemetry_reflection_;
   return metadata;
 }
 

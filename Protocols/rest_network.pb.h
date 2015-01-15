@@ -23,6 +23,7 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
+#include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
@@ -34,7 +35,29 @@ void protobuf_AssignDesc_rest_5fnetwork_2eproto();
 void protobuf_ShutdownFile_rest_5fnetwork_2eproto();
 
 class ControlNetworkData;
+class Telemetry;
 
+enum run_mode {
+  STOP = 0,
+  TELEOP = 1,
+  SAFE_AUTON = 2,
+  FULL_AUTON = 3
+};
+bool run_mode_IsValid(int value);
+const run_mode run_mode_MIN = STOP;
+const run_mode run_mode_MAX = FULL_AUTON;
+const int run_mode_ARRAYSIZE = run_mode_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* run_mode_descriptor();
+inline const ::std::string& run_mode_Name(run_mode value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    run_mode_descriptor(), value);
+}
+inline bool run_mode_Parse(
+    const ::std::string& name, run_mode* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<run_mode>(
+    run_mode_descriptor(), name, value);
+}
 // ===================================================================
 
 class ControlNetworkData : public ::google::protobuf::Message {
@@ -90,26 +113,26 @@ class ControlNetworkData : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required sint32 left = 1;
+  // required sint32 left = 1 [default = 0];
   inline bool has_left() const;
   inline void clear_left();
   static const int kLeftFieldNumber = 1;
   inline ::google::protobuf::int32 left() const;
   inline void set_left(::google::protobuf::int32 value);
 
-  // required sint32 right = 2;
+  // required sint32 right = 2 [default = 0];
   inline bool has_right() const;
   inline void clear_right();
   static const int kRightFieldNumber = 2;
   inline ::google::protobuf::int32 right() const;
   inline void set_right(::google::protobuf::int32 value);
 
-  // required int32 mode = 3;
+  // required .rest_network.run_mode mode = 3 [default = STOP];
   inline bool has_mode() const;
   inline void clear_mode();
   static const int kModeFieldNumber = 3;
-  inline ::google::protobuf::int32 mode() const;
-  inline void set_mode(::google::protobuf::int32 value);
+  inline ::rest_network::run_mode mode() const;
+  inline void set_mode(::rest_network::run_mode value);
 
   // @@protoc_insertion_point(class_scope:rest_network.ControlNetworkData)
  private:
@@ -126,13 +149,112 @@ class ControlNetworkData : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::int32 left_;
   ::google::protobuf::int32 right_;
-  ::google::protobuf::int32 mode_;
+  int mode_;
   friend void  protobuf_AddDesc_rest_5fnetwork_2eproto();
   friend void protobuf_AssignDesc_rest_5fnetwork_2eproto();
   friend void protobuf_ShutdownFile_rest_5fnetwork_2eproto();
 
   void InitAsDefaultInstance();
   static ControlNetworkData* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class Telemetry : public ::google::protobuf::Message {
+ public:
+  Telemetry();
+  virtual ~Telemetry();
+
+  Telemetry(const Telemetry& from);
+
+  inline Telemetry& operator=(const Telemetry& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Telemetry& default_instance();
+
+  void Swap(Telemetry* other);
+
+  // implements Message ----------------------------------------------
+
+  Telemetry* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const Telemetry& from);
+  void MergeFrom(const Telemetry& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required sint32 left = 1;
+  inline bool has_left() const;
+  inline void clear_left();
+  static const int kLeftFieldNumber = 1;
+  inline ::google::protobuf::int32 left() const;
+  inline void set_left(::google::protobuf::int32 value);
+
+  // required sint32 right = 2;
+  inline bool has_right() const;
+  inline void clear_right();
+  static const int kRightFieldNumber = 2;
+  inline ::google::protobuf::int32 right() const;
+  inline void set_right(::google::protobuf::int32 value);
+
+  // required .rest_network.run_mode mode = 3;
+  inline bool has_mode() const;
+  inline void clear_mode();
+  static const int kModeFieldNumber = 3;
+  inline ::rest_network::run_mode mode() const;
+  inline void set_mode(::rest_network::run_mode value);
+
+  // @@protoc_insertion_point(class_scope:rest_network.Telemetry)
+ private:
+  inline void set_has_left();
+  inline void clear_has_left();
+  inline void set_has_right();
+  inline void clear_has_right();
+  inline void set_has_mode();
+  inline void clear_has_mode();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::int32 left_;
+  ::google::protobuf::int32 right_;
+  int mode_;
+  friend void  protobuf_AddDesc_rest_5fnetwork_2eproto();
+  friend void protobuf_AssignDesc_rest_5fnetwork_2eproto();
+  friend void protobuf_ShutdownFile_rest_5fnetwork_2eproto();
+
+  void InitAsDefaultInstance();
+  static Telemetry* default_instance_;
 };
 // ===================================================================
 
@@ -141,7 +263,7 @@ class ControlNetworkData : public ::google::protobuf::Message {
 
 // ControlNetworkData
 
-// required sint32 left = 1;
+// required sint32 left = 1 [default = 0];
 inline bool ControlNetworkData::has_left() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -165,7 +287,7 @@ inline void ControlNetworkData::set_left(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:rest_network.ControlNetworkData.left)
 }
 
-// required sint32 right = 2;
+// required sint32 right = 2 [default = 0];
 inline bool ControlNetworkData::has_right() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -189,7 +311,7 @@ inline void ControlNetworkData::set_right(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:rest_network.ControlNetworkData.right)
 }
 
-// required int32 mode = 3;
+// required .rest_network.run_mode mode = 3 [default = STOP];
 inline bool ControlNetworkData::has_mode() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -203,14 +325,92 @@ inline void ControlNetworkData::clear_mode() {
   mode_ = 0;
   clear_has_mode();
 }
-inline ::google::protobuf::int32 ControlNetworkData::mode() const {
+inline ::rest_network::run_mode ControlNetworkData::mode() const {
   // @@protoc_insertion_point(field_get:rest_network.ControlNetworkData.mode)
-  return mode_;
+  return static_cast< ::rest_network::run_mode >(mode_);
 }
-inline void ControlNetworkData::set_mode(::google::protobuf::int32 value) {
+inline void ControlNetworkData::set_mode(::rest_network::run_mode value) {
+  assert(::rest_network::run_mode_IsValid(value));
   set_has_mode();
   mode_ = value;
   // @@protoc_insertion_point(field_set:rest_network.ControlNetworkData.mode)
+}
+
+// -------------------------------------------------------------------
+
+// Telemetry
+
+// required sint32 left = 1;
+inline bool Telemetry::has_left() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void Telemetry::set_has_left() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void Telemetry::clear_has_left() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void Telemetry::clear_left() {
+  left_ = 0;
+  clear_has_left();
+}
+inline ::google::protobuf::int32 Telemetry::left() const {
+  // @@protoc_insertion_point(field_get:rest_network.Telemetry.left)
+  return left_;
+}
+inline void Telemetry::set_left(::google::protobuf::int32 value) {
+  set_has_left();
+  left_ = value;
+  // @@protoc_insertion_point(field_set:rest_network.Telemetry.left)
+}
+
+// required sint32 right = 2;
+inline bool Telemetry::has_right() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Telemetry::set_has_right() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Telemetry::clear_has_right() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void Telemetry::clear_right() {
+  right_ = 0;
+  clear_has_right();
+}
+inline ::google::protobuf::int32 Telemetry::right() const {
+  // @@protoc_insertion_point(field_get:rest_network.Telemetry.right)
+  return right_;
+}
+inline void Telemetry::set_right(::google::protobuf::int32 value) {
+  set_has_right();
+  right_ = value;
+  // @@protoc_insertion_point(field_set:rest_network.Telemetry.right)
+}
+
+// required .rest_network.run_mode mode = 3;
+inline bool Telemetry::has_mode() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void Telemetry::set_has_mode() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void Telemetry::clear_has_mode() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void Telemetry::clear_mode() {
+  mode_ = 0;
+  clear_has_mode();
+}
+inline ::rest_network::run_mode Telemetry::mode() const {
+  // @@protoc_insertion_point(field_get:rest_network.Telemetry.mode)
+  return static_cast< ::rest_network::run_mode >(mode_);
+}
+inline void Telemetry::set_mode(::rest_network::run_mode value) {
+  assert(::rest_network::run_mode_IsValid(value));
+  set_has_mode();
+  mode_ = value;
+  // @@protoc_insertion_point(field_set:rest_network.Telemetry.mode)
 }
 
 
@@ -222,6 +422,11 @@ inline void ControlNetworkData::set_mode(::google::protobuf::int32 value) {
 namespace google {
 namespace protobuf {
 
+template <> struct is_proto_enum< ::rest_network::run_mode> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::rest_network::run_mode>() {
+  return ::rest_network::run_mode_descriptor();
+}
 
 }  // namespace google
 }  // namespace protobuf
