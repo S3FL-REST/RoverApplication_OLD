@@ -31,11 +31,11 @@ void NetworkData::ParseDataString(QByteArray data) {
     if (controlData.has_mode())
         currentRunMode = controlData.mode();
 
-    if (controlData.has_left())
-        joystick_left = controlData.left();
+    if (controlData.has_joy_left())
+        joystick_left = controlData.joy_left();
 
-    if (controlData.has_right())
-        joystick_right = controlData.right();
+    if (controlData.has_joy_right())
+        joystick_right = controlData.joy_right();
 }
 
 void NetworkData::ResetToDefaults() {

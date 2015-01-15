@@ -39,8 +39,8 @@ void protobuf_AssignDesc_rest_5fnetwork_2eproto() {
   GOOGLE_CHECK(file != NULL);
   ControlNetworkData_descriptor_ = file->message_type(0);
   static const int ControlNetworkData_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ControlNetworkData, left_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ControlNetworkData, right_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ControlNetworkData, joy_left_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ControlNetworkData, joy_right_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ControlNetworkData, mode_),
   };
   ControlNetworkData_reflection_ =
@@ -58,7 +58,7 @@ void protobuf_AssignDesc_rest_5fnetwork_2eproto() {
   static const int Telemetry_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Telemetry, left_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Telemetry, right_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Telemetry, mode_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Telemetry, current_mode_),
   };
   Telemetry_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -106,13 +106,14 @@ void protobuf_AddDesc_rest_5fnetwork_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022rest_network.proto\022\014rest_network\"W\n\022Co"
-    "ntrolNetworkData\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030"
-    "\002 \002(\021\022$\n\004mode\030\003 \002(\0162\026.rest_network.run_m"
-    "ode\"N\n\tTelemetry\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030"
-    "\002 \002(\021\022$\n\004mode\030\003 \002(\0162\026.rest_network.run_m"
-    "ode*@\n\010run_mode\022\010\n\004STOP\020\000\022\n\n\006TELEOP\020\001\022\016\n"
-    "\nSAFE_AUTON\020\002\022\016\n\nFULL_AUTON\020\003", 269);
+    "\n\022rest_network.proto\022\014rest_network\"_\n\022Co"
+    "ntrolNetworkData\022\020\n\010joy_left\030\001 \002(\021\022\021\n\tjo"
+    "y_right\030\002 \002(\021\022$\n\004mode\030\003 \002(\0162\026.rest_netwo"
+    "rk.run_mode\"V\n\tTelemetry\022\014\n\004left\030\001 \002(\021\022\r"
+    "\n\005right\030\002 \002(\021\022,\n\014current_mode\030\003 \002(\0162\026.re"
+    "st_network.run_mode*@\n\010run_mode\022\010\n\004STOP\020"
+    "\000\022\n\n\006TELEOP\020\001\022\016\n\nSAFE_AUTON\020\002\022\016\n\nFULL_AU"
+    "TON\020\003", 285);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "rest_network.proto", &protobuf_RegisterTypes);
   ControlNetworkData::default_instance_ = new ControlNetworkData();
@@ -148,8 +149,8 @@ bool run_mode_IsValid(int value) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int ControlNetworkData::kLeftFieldNumber;
-const int ControlNetworkData::kRightFieldNumber;
+const int ControlNetworkData::kJoyLeftFieldNumber;
+const int ControlNetworkData::kJoyRightFieldNumber;
 const int ControlNetworkData::kModeFieldNumber;
 #endif  // !_MSC_VER
 
@@ -171,8 +172,8 @@ ControlNetworkData::ControlNetworkData(const ControlNetworkData& from)
 
 void ControlNetworkData::SharedCtor() {
   _cached_size_ = 0;
-  left_ = 0;
-  right_ = 0;
+  joy_left_ = 0;
+  joy_right_ = 0;
   mode_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -219,7 +220,7 @@ void ControlNetworkData::Clear() {
     ::memset(&first, 0, n);                                \
   } while (0)
 
-  ZR_(left_, mode_);
+  ZR_(joy_left_, mode_);
 
 #undef OFFSET_OF_FIELD_
 #undef ZR_
@@ -238,28 +239,28 @@ bool ControlNetworkData::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required sint32 left = 1;
+      // required sint32 joy_left = 1;
       case 1: {
         if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
-                 input, &left_)));
-          set_has_left();
+                 input, &joy_left_)));
+          set_has_joy_left();
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(16)) goto parse_right;
+        if (input->ExpectTag(16)) goto parse_joy_right;
         break;
       }
 
-      // required sint32 right = 2;
+      // required sint32 joy_right = 2;
       case 2: {
         if (tag == 16) {
-         parse_right:
+         parse_joy_right:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
-                 input, &right_)));
-          set_has_right();
+                 input, &joy_right_)));
+          set_has_joy_right();
         } else {
           goto handle_unusual;
         }
@@ -312,14 +313,14 @@ failure:
 void ControlNetworkData::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:rest_network.ControlNetworkData)
-  // required sint32 left = 1;
-  if (has_left()) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt32(1, this->left(), output);
+  // required sint32 joy_left = 1;
+  if (has_joy_left()) {
+    ::google::protobuf::internal::WireFormatLite::WriteSInt32(1, this->joy_left(), output);
   }
 
-  // required sint32 right = 2;
-  if (has_right()) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt32(2, this->right(), output);
+  // required sint32 joy_right = 2;
+  if (has_joy_right()) {
+    ::google::protobuf::internal::WireFormatLite::WriteSInt32(2, this->joy_right(), output);
   }
 
   // required .rest_network.run_mode mode = 3;
@@ -338,14 +339,14 @@ void ControlNetworkData::SerializeWithCachedSizes(
 ::google::protobuf::uint8* ControlNetworkData::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:rest_network.ControlNetworkData)
-  // required sint32 left = 1;
-  if (has_left()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(1, this->left(), target);
+  // required sint32 joy_left = 1;
+  if (has_joy_left()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(1, this->joy_left(), target);
   }
 
-  // required sint32 right = 2;
-  if (has_right()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(2, this->right(), target);
+  // required sint32 joy_right = 2;
+  if (has_joy_right()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(2, this->joy_right(), target);
   }
 
   // required .rest_network.run_mode mode = 3;
@@ -366,18 +367,18 @@ int ControlNetworkData::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required sint32 left = 1;
-    if (has_left()) {
+    // required sint32 joy_left = 1;
+    if (has_joy_left()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::SInt32Size(
-          this->left());
+          this->joy_left());
     }
 
-    // required sint32 right = 2;
-    if (has_right()) {
+    // required sint32 joy_right = 2;
+    if (has_joy_right()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::SInt32Size(
-          this->right());
+          this->joy_right());
     }
 
     // required .rest_network.run_mode mode = 3;
@@ -413,11 +414,11 @@ void ControlNetworkData::MergeFrom(const ::google::protobuf::Message& from) {
 void ControlNetworkData::MergeFrom(const ControlNetworkData& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_left()) {
-      set_left(from.left());
+    if (from.has_joy_left()) {
+      set_joy_left(from.joy_left());
     }
-    if (from.has_right()) {
-      set_right(from.right());
+    if (from.has_joy_right()) {
+      set_joy_right(from.joy_right());
     }
     if (from.has_mode()) {
       set_mode(from.mode());
@@ -446,8 +447,8 @@ bool ControlNetworkData::IsInitialized() const {
 
 void ControlNetworkData::Swap(ControlNetworkData* other) {
   if (other != this) {
-    std::swap(left_, other->left_);
-    std::swap(right_, other->right_);
+    std::swap(joy_left_, other->joy_left_);
+    std::swap(joy_right_, other->joy_right_);
     std::swap(mode_, other->mode_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
@@ -469,7 +470,7 @@ void ControlNetworkData::Swap(ControlNetworkData* other) {
 #ifndef _MSC_VER
 const int Telemetry::kLeftFieldNumber;
 const int Telemetry::kRightFieldNumber;
-const int Telemetry::kModeFieldNumber;
+const int Telemetry::kCurrentModeFieldNumber;
 #endif  // !_MSC_VER
 
 Telemetry::Telemetry()
@@ -492,7 +493,7 @@ void Telemetry::SharedCtor() {
   _cached_size_ = 0;
   left_ = 0;
   right_ = 0;
-  mode_ = 0;
+  current_mode_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -538,7 +539,7 @@ void Telemetry::Clear() {
     ::memset(&first, 0, n);                                \
   } while (0)
 
-  ZR_(left_, mode_);
+  ZR_(left_, current_mode_);
 
 #undef OFFSET_OF_FIELD_
 #undef ZR_
@@ -582,20 +583,20 @@ bool Telemetry::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(24)) goto parse_mode;
+        if (input->ExpectTag(24)) goto parse_current_mode;
         break;
       }
 
-      // required .rest_network.run_mode mode = 3;
+      // required .rest_network.run_mode current_mode = 3;
       case 3: {
         if (tag == 24) {
-         parse_mode:
+         parse_current_mode:
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
           if (::rest_network::run_mode_IsValid(value)) {
-            set_mode(static_cast< ::rest_network::run_mode >(value));
+            set_current_mode(static_cast< ::rest_network::run_mode >(value));
           } else {
             mutable_unknown_fields()->AddVarint(3, value);
           }
@@ -641,10 +642,10 @@ void Telemetry::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteSInt32(2, this->right(), output);
   }
 
-  // required .rest_network.run_mode mode = 3;
-  if (has_mode()) {
+  // required .rest_network.run_mode current_mode = 3;
+  if (has_current_mode()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      3, this->mode(), output);
+      3, this->current_mode(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -667,10 +668,10 @@ void Telemetry::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(2, this->right(), target);
   }
 
-  // required .rest_network.run_mode mode = 3;
-  if (has_mode()) {
+  // required .rest_network.run_mode current_mode = 3;
+  if (has_current_mode()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      3, this->mode(), target);
+      3, this->current_mode(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -699,10 +700,10 @@ int Telemetry::ByteSize() const {
           this->right());
     }
 
-    // required .rest_network.run_mode mode = 3;
-    if (has_mode()) {
+    // required .rest_network.run_mode current_mode = 3;
+    if (has_current_mode()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->mode());
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->current_mode());
     }
 
   }
@@ -738,8 +739,8 @@ void Telemetry::MergeFrom(const Telemetry& from) {
     if (from.has_right()) {
       set_right(from.right());
     }
-    if (from.has_mode()) {
-      set_mode(from.mode());
+    if (from.has_current_mode()) {
+      set_current_mode(from.current_mode());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -767,7 +768,7 @@ void Telemetry::Swap(Telemetry* other) {
   if (other != this) {
     std::swap(left_, other->left_);
     std::swap(right_, other->right_);
-    std::swap(mode_, other->mode_);
+    std::swap(current_mode_, other->current_mode_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

@@ -113,19 +113,19 @@ class ControlNetworkData : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required sint32 left = 1;
-  inline bool has_left() const;
-  inline void clear_left();
-  static const int kLeftFieldNumber = 1;
-  inline ::google::protobuf::int32 left() const;
-  inline void set_left(::google::protobuf::int32 value);
+  // required sint32 joy_left = 1;
+  inline bool has_joy_left() const;
+  inline void clear_joy_left();
+  static const int kJoyLeftFieldNumber = 1;
+  inline ::google::protobuf::int32 joy_left() const;
+  inline void set_joy_left(::google::protobuf::int32 value);
 
-  // required sint32 right = 2;
-  inline bool has_right() const;
-  inline void clear_right();
-  static const int kRightFieldNumber = 2;
-  inline ::google::protobuf::int32 right() const;
-  inline void set_right(::google::protobuf::int32 value);
+  // required sint32 joy_right = 2;
+  inline bool has_joy_right() const;
+  inline void clear_joy_right();
+  static const int kJoyRightFieldNumber = 2;
+  inline ::google::protobuf::int32 joy_right() const;
+  inline void set_joy_right(::google::protobuf::int32 value);
 
   // required .rest_network.run_mode mode = 3;
   inline bool has_mode() const;
@@ -136,10 +136,10 @@ class ControlNetworkData : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:rest_network.ControlNetworkData)
  private:
-  inline void set_has_left();
-  inline void clear_has_left();
-  inline void set_has_right();
-  inline void clear_has_right();
+  inline void set_has_joy_left();
+  inline void clear_has_joy_left();
+  inline void set_has_joy_right();
+  inline void clear_has_joy_right();
   inline void set_has_mode();
   inline void clear_has_mode();
 
@@ -147,8 +147,8 @@ class ControlNetworkData : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::google::protobuf::int32 left_;
-  ::google::protobuf::int32 right_;
+  ::google::protobuf::int32 joy_left_;
+  ::google::protobuf::int32 joy_right_;
   int mode_;
   friend void  protobuf_AddDesc_rest_5fnetwork_2eproto();
   friend void protobuf_AssignDesc_rest_5fnetwork_2eproto();
@@ -226,12 +226,12 @@ class Telemetry : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 right() const;
   inline void set_right(::google::protobuf::int32 value);
 
-  // required .rest_network.run_mode mode = 3;
-  inline bool has_mode() const;
-  inline void clear_mode();
-  static const int kModeFieldNumber = 3;
-  inline ::rest_network::run_mode mode() const;
-  inline void set_mode(::rest_network::run_mode value);
+  // required .rest_network.run_mode current_mode = 3;
+  inline bool has_current_mode() const;
+  inline void clear_current_mode();
+  static const int kCurrentModeFieldNumber = 3;
+  inline ::rest_network::run_mode current_mode() const;
+  inline void set_current_mode(::rest_network::run_mode value);
 
   // @@protoc_insertion_point(class_scope:rest_network.Telemetry)
  private:
@@ -239,8 +239,8 @@ class Telemetry : public ::google::protobuf::Message {
   inline void clear_has_left();
   inline void set_has_right();
   inline void clear_has_right();
-  inline void set_has_mode();
-  inline void clear_has_mode();
+  inline void set_has_current_mode();
+  inline void clear_has_current_mode();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -248,7 +248,7 @@ class Telemetry : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::int32 left_;
   ::google::protobuf::int32 right_;
-  int mode_;
+  int current_mode_;
   friend void  protobuf_AddDesc_rest_5fnetwork_2eproto();
   friend void protobuf_AssignDesc_rest_5fnetwork_2eproto();
   friend void protobuf_ShutdownFile_rest_5fnetwork_2eproto();
@@ -263,52 +263,52 @@ class Telemetry : public ::google::protobuf::Message {
 
 // ControlNetworkData
 
-// required sint32 left = 1;
-inline bool ControlNetworkData::has_left() const {
+// required sint32 joy_left = 1;
+inline bool ControlNetworkData::has_joy_left() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ControlNetworkData::set_has_left() {
+inline void ControlNetworkData::set_has_joy_left() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ControlNetworkData::clear_has_left() {
+inline void ControlNetworkData::clear_has_joy_left() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void ControlNetworkData::clear_left() {
-  left_ = 0;
-  clear_has_left();
+inline void ControlNetworkData::clear_joy_left() {
+  joy_left_ = 0;
+  clear_has_joy_left();
 }
-inline ::google::protobuf::int32 ControlNetworkData::left() const {
-  // @@protoc_insertion_point(field_get:rest_network.ControlNetworkData.left)
-  return left_;
+inline ::google::protobuf::int32 ControlNetworkData::joy_left() const {
+  // @@protoc_insertion_point(field_get:rest_network.ControlNetworkData.joy_left)
+  return joy_left_;
 }
-inline void ControlNetworkData::set_left(::google::protobuf::int32 value) {
-  set_has_left();
-  left_ = value;
-  // @@protoc_insertion_point(field_set:rest_network.ControlNetworkData.left)
+inline void ControlNetworkData::set_joy_left(::google::protobuf::int32 value) {
+  set_has_joy_left();
+  joy_left_ = value;
+  // @@protoc_insertion_point(field_set:rest_network.ControlNetworkData.joy_left)
 }
 
-// required sint32 right = 2;
-inline bool ControlNetworkData::has_right() const {
+// required sint32 joy_right = 2;
+inline bool ControlNetworkData::has_joy_right() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ControlNetworkData::set_has_right() {
+inline void ControlNetworkData::set_has_joy_right() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void ControlNetworkData::clear_has_right() {
+inline void ControlNetworkData::clear_has_joy_right() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void ControlNetworkData::clear_right() {
-  right_ = 0;
-  clear_has_right();
+inline void ControlNetworkData::clear_joy_right() {
+  joy_right_ = 0;
+  clear_has_joy_right();
 }
-inline ::google::protobuf::int32 ControlNetworkData::right() const {
-  // @@protoc_insertion_point(field_get:rest_network.ControlNetworkData.right)
-  return right_;
+inline ::google::protobuf::int32 ControlNetworkData::joy_right() const {
+  // @@protoc_insertion_point(field_get:rest_network.ControlNetworkData.joy_right)
+  return joy_right_;
 }
-inline void ControlNetworkData::set_right(::google::protobuf::int32 value) {
-  set_has_right();
-  right_ = value;
-  // @@protoc_insertion_point(field_set:rest_network.ControlNetworkData.right)
+inline void ControlNetworkData::set_joy_right(::google::protobuf::int32 value) {
+  set_has_joy_right();
+  joy_right_ = value;
+  // @@protoc_insertion_point(field_set:rest_network.ControlNetworkData.joy_right)
 }
 
 // required .rest_network.run_mode mode = 3;
@@ -388,29 +388,29 @@ inline void Telemetry::set_right(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:rest_network.Telemetry.right)
 }
 
-// required .rest_network.run_mode mode = 3;
-inline bool Telemetry::has_mode() const {
+// required .rest_network.run_mode current_mode = 3;
+inline bool Telemetry::has_current_mode() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void Telemetry::set_has_mode() {
+inline void Telemetry::set_has_current_mode() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void Telemetry::clear_has_mode() {
+inline void Telemetry::clear_has_current_mode() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void Telemetry::clear_mode() {
-  mode_ = 0;
-  clear_has_mode();
+inline void Telemetry::clear_current_mode() {
+  current_mode_ = 0;
+  clear_has_current_mode();
 }
-inline ::rest_network::run_mode Telemetry::mode() const {
-  // @@protoc_insertion_point(field_get:rest_network.Telemetry.mode)
-  return static_cast< ::rest_network::run_mode >(mode_);
+inline ::rest_network::run_mode Telemetry::current_mode() const {
+  // @@protoc_insertion_point(field_get:rest_network.Telemetry.current_mode)
+  return static_cast< ::rest_network::run_mode >(current_mode_);
 }
-inline void Telemetry::set_mode(::rest_network::run_mode value) {
+inline void Telemetry::set_current_mode(::rest_network::run_mode value) {
   assert(::rest_network::run_mode_IsValid(value));
-  set_has_mode();
-  mode_ = value;
-  // @@protoc_insertion_point(field_set:rest_network.Telemetry.mode)
+  set_has_current_mode();
+  current_mode_ = value;
+  // @@protoc_insertion_point(field_set:rest_network.Telemetry.current_mode)
 }
 
 
