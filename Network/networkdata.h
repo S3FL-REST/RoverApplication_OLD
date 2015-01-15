@@ -4,6 +4,7 @@
 #include <QObject>
 #include "Protocols/rest_network.pb.h"
 
+using namespace std;
 using namespace rest_network;
 
 class NetworkData : public QObject
@@ -19,6 +20,7 @@ public:
 public slots:
      void ParseDataString(QByteArray);
      void ResetToDefaults();
+     void Print(ostream&);
 
 private:
     run_mode currentRunMode;

@@ -5,8 +5,6 @@
 #include <QString>
 #include <QTimer>
 
-#include <string>
-
 #include "Rover/serialworker.h"
 #include "Rover/robotdata.h"
 

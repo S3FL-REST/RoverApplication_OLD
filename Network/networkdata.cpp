@@ -28,11 +28,14 @@ void NetworkData::ParseDataString(QByteArray data) {
     ControlNetworkData controlData;
     controlData.ParseFromArray(data, data.length());
 
-    //TODO: Fix Lurching in Code
+    if (controlData.has_mode())
+        currentRunMode = controlData.mode();
 
-    currentRunMode = controlData.mode();
-    joystick_left = controlData.left();
-    joystick_right = controlData.right();
+    if (controlData.has_left())
+        joystick_left = controlData.left();
+
+    if (controlData.has_right())
+        joystick_right = controlData.right();
 }
 
 void NetworkData::ResetToDefaults() {
@@ -41,4 +44,10 @@ void NetworkData::ResetToDefaults() {
     right = 0;
     joystick_left = 0;
     joystick_right = 0;
+}
+
+void NetworkData::Print(ostream &out) {
+    out << "Mode: " << currentRunMode << endl;
+    out << "Left: " << left << ", Right: " << right << endl;
+    out << "Joy Left: " << joystick_left << ", Joy Right: " << joystick_right << endl;
 }

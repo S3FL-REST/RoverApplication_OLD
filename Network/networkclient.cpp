@@ -35,9 +35,8 @@ void NetworkClient::SocketDisconnected() {
 void NetworkClient::DataReady() {
     QByteArray data = "";
 
-    while (socket->bytesAvailable()) {
+    while (socket->bytesAvailable())
         data += socket->readAll();
-    }
 
     emit DataReceived(data);
 }

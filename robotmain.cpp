@@ -32,15 +32,8 @@ void RobotMain::StopRunLoop() {
     cout << "Stopping Main Run Loop" << endl;
 }
 
-int j = 0;
-
 void RobotMain::RunLoop() {
     //robotData.Print(cout);
-
-    if (networkData.GetCurrentRunMode() == STOP) {
-        cout << "STOP " << j << endl;
-        j++;
-    }
 }
 
 void RobotMain::SetMotorSpeeds(int lMotor, int rMotor) {
