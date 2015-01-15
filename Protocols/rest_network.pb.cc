@@ -106,14 +106,13 @@ void protobuf_AddDesc_rest_5fnetwork_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022rest_network.proto\022\014rest_network\"c\n\022Co"
-    "ntrolNetworkData\022\017\n\004left\030\001 \002(\021:\0010\022\020\n\005rig"
-    "ht\030\002 \002(\021:\0010\022*\n\004mode\030\003 \002(\0162\026.rest_network"
-    ".run_mode:\004STOP\"N\n\tTelemetry\022\014\n\004left\030\001 \002"
-    "(\021\022\r\n\005right\030\002 \002(\021\022$\n\004mode\030\003 \002(\0162\026.rest_n"
-    "etwork.run_mode*@\n\010run_mode\022\010\n\004STOP\020\000\022\n\n"
-    "\006TELEOP\020\001\022\016\n\nSAFE_AUTON\020\002\022\016\n\nFULL_AUTON\020"
-    "\003", 281);
+    "\n\022rest_network.proto\022\014rest_network\"W\n\022Co"
+    "ntrolNetworkData\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030"
+    "\002 \002(\021\022$\n\004mode\030\003 \002(\0162\026.rest_network.run_m"
+    "ode\"N\n\tTelemetry\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030"
+    "\002 \002(\021\022$\n\004mode\030\003 \002(\0162\026.rest_network.run_m"
+    "ode*@\n\010run_mode\022\010\n\004STOP\020\000\022\n\n\006TELEOP\020\001\022\016\n"
+    "\nSAFE_AUTON\020\002\022\016\n\nFULL_AUTON\020\003", 269);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "rest_network.proto", &protobuf_RegisterTypes);
   ControlNetworkData::default_instance_ = new ControlNetworkData();
@@ -239,7 +238,7 @@ bool ControlNetworkData::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required sint32 left = 1 [default = 0];
+      // required sint32 left = 1;
       case 1: {
         if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
@@ -253,7 +252,7 @@ bool ControlNetworkData::MergePartialFromCodedStream(
         break;
       }
 
-      // required sint32 right = 2 [default = 0];
+      // required sint32 right = 2;
       case 2: {
         if (tag == 16) {
          parse_right:
@@ -268,7 +267,7 @@ bool ControlNetworkData::MergePartialFromCodedStream(
         break;
       }
 
-      // required .rest_network.run_mode mode = 3 [default = STOP];
+      // required .rest_network.run_mode mode = 3;
       case 3: {
         if (tag == 24) {
          parse_mode:
@@ -313,17 +312,17 @@ failure:
 void ControlNetworkData::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:rest_network.ControlNetworkData)
-  // required sint32 left = 1 [default = 0];
+  // required sint32 left = 1;
   if (has_left()) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt32(1, this->left(), output);
   }
 
-  // required sint32 right = 2 [default = 0];
+  // required sint32 right = 2;
   if (has_right()) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt32(2, this->right(), output);
   }
 
-  // required .rest_network.run_mode mode = 3 [default = STOP];
+  // required .rest_network.run_mode mode = 3;
   if (has_mode()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       3, this->mode(), output);
@@ -339,17 +338,17 @@ void ControlNetworkData::SerializeWithCachedSizes(
 ::google::protobuf::uint8* ControlNetworkData::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:rest_network.ControlNetworkData)
-  // required sint32 left = 1 [default = 0];
+  // required sint32 left = 1;
   if (has_left()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(1, this->left(), target);
   }
 
-  // required sint32 right = 2 [default = 0];
+  // required sint32 right = 2;
   if (has_right()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(2, this->right(), target);
   }
 
-  // required .rest_network.run_mode mode = 3 [default = STOP];
+  // required .rest_network.run_mode mode = 3;
   if (has_mode()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       3, this->mode(), target);
@@ -367,21 +366,21 @@ int ControlNetworkData::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required sint32 left = 1 [default = 0];
+    // required sint32 left = 1;
     if (has_left()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::SInt32Size(
           this->left());
     }
 
-    // required sint32 right = 2 [default = 0];
+    // required sint32 right = 2;
     if (has_right()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::SInt32Size(
           this->right());
     }
 
-    // required .rest_network.run_mode mode = 3 [default = STOP];
+    // required .rest_network.run_mode mode = 3;
     if (has_mode()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->mode());

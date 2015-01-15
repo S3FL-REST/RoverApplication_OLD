@@ -113,21 +113,21 @@ class ControlNetworkData : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required sint32 left = 1 [default = 0];
+  // required sint32 left = 1;
   inline bool has_left() const;
   inline void clear_left();
   static const int kLeftFieldNumber = 1;
   inline ::google::protobuf::int32 left() const;
   inline void set_left(::google::protobuf::int32 value);
 
-  // required sint32 right = 2 [default = 0];
+  // required sint32 right = 2;
   inline bool has_right() const;
   inline void clear_right();
   static const int kRightFieldNumber = 2;
   inline ::google::protobuf::int32 right() const;
   inline void set_right(::google::protobuf::int32 value);
 
-  // required .rest_network.run_mode mode = 3 [default = STOP];
+  // required .rest_network.run_mode mode = 3;
   inline bool has_mode() const;
   inline void clear_mode();
   static const int kModeFieldNumber = 3;
@@ -263,7 +263,7 @@ class Telemetry : public ::google::protobuf::Message {
 
 // ControlNetworkData
 
-// required sint32 left = 1 [default = 0];
+// required sint32 left = 1;
 inline bool ControlNetworkData::has_left() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -287,7 +287,7 @@ inline void ControlNetworkData::set_left(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:rest_network.ControlNetworkData.left)
 }
 
-// required sint32 right = 2 [default = 0];
+// required sint32 right = 2;
 inline bool ControlNetworkData::has_right() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -311,7 +311,7 @@ inline void ControlNetworkData::set_right(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:rest_network.ControlNetworkData.right)
 }
 
-// required .rest_network.run_mode mode = 3 [default = STOP];
+// required .rest_network.run_mode mode = 3;
 inline bool ControlNetworkData::has_mode() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }

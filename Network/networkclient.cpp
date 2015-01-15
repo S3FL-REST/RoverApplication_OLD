@@ -29,6 +29,7 @@ void NetworkClient::NewConnection() {
 void NetworkClient::SocketDisconnected() {
     qDebug() << "Socket " << socket->localAddress().toString() << " Disconnected";
     socket = 0;
+    emit ConnectionLost();
 }
 
 void NetworkClient::DataReady() {

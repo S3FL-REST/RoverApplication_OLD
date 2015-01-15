@@ -8,6 +8,7 @@ RobotMain::RobotMain(string serial_port) : robotData(), robotSerial(serial_port)
 
     //Connect signals and slots for network
     connect(&networkClient, SIGNAL(DataReceived(QByteArray)), &networkData, SLOT(ParseDataString(QByteArray)));
+    connect(&networkClient, SIGNAL(ConnectionLost()), &networkData, SLOT(ResetToDefaults()));
 
     //Start the robotSerial thread
     SerialWorker::StartWorker(&robotSerial);
@@ -31,8 +32,15 @@ void RobotMain::StopRunLoop() {
     cout << "Stopping Main Run Loop" << endl;
 }
 
+int j = 0;
+
 void RobotMain::RunLoop() {
     //robotData.Print(cout);
+
+    if (networkData.GetCurrentRunMode() == STOP) {
+        cout << "STOP " << j << endl;
+        j++;
+    }
 }
 
 void RobotMain::SetMotorSpeeds(int lMotor, int rMotor) {

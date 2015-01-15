@@ -28,6 +28,7 @@ private:
 
 signals:
     void DataReceived(QByteArray);
+    void ConnectionLost();
 
 public slots:
     void NewConnection();

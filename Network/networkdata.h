@@ -11,17 +11,23 @@ class NetworkData : public QObject
     Q_OBJECT
 
 public:
-    enum RunMode {TELEOP, AUTON, AUTON_SAFE, NONE};
-
     NetworkData();
 
-    RunMode GetCurrentRunMode();
+    run_mode GetCurrentRunMode();
+    void SetMotors(int new_left, int new_right);
 
 public slots:
      void ParseDataString(QByteArray);
+     void ResetToDefaults();
 
 private:
-    RunMode currentRunMode;
+    run_mode currentRunMode;
+    int left;
+    int right;
+
+    int joystick_left;
+    int joystick_right;
+
 };
 
 #endif // NETWORKDATA_H
