@@ -19,6 +19,8 @@ class NetworkClient : public QObject
 public:
     NetworkClient();
 
+    bool IsConnected();
+
 private:
     QTcpServer server;
     QTcpSocket *socket;

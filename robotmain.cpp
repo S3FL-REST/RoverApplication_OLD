@@ -1,21 +1,15 @@
 #include "robotmain.h"
 
-RobotMain::RobotMain(string serial_port) : robotData(), robotSerial(serial_port), networkClient(), networkData(), timer(this) {
-
-    //Connect signals and slots for serial object
-    connect(this, SIGNAL(SendData(QString)), &robotSerial, SLOT(SendData(QString)));
-    connect(&robotSerial, SIGNAL(ReceivedData(QString)), this, SLOT(RecievedData(QString)));
-
+RobotMain::RobotMain() : robotData(), networkClient(), networkData(), visionData(), timer(this) {
     //Connect signals and slots for network
     connect(&networkClient, SIGNAL(DataReceived(QByteArray)), &networkData, SLOT(ParseDataString(QByteArray)));
     connect(&networkClient, SIGNAL(ConnectionLost()), &networkData, SLOT(ResetToDefaults()));
 
-    //Start the robotSerial thread
-    SerialWorker::StartWorker(&robotSerial);
-
     //Set the timer interval and connect the timer event to the robot run loop
     timer.setInterval(5);
     connect(&timer, SIGNAL(timeout()), this, SLOT(RunLoop()));
+
+    currentAutonMode = TO_MINING;
 }
 
 void RobotMain::RecievedData(QString data) {
@@ -33,10 +27,31 @@ void RobotMain::StopRunLoop() {
 }
 
 void RobotMain::RunLoop() {
-    //robotData.Print(cout);
-}
+    if (networkData.GetCurrentRunMode() == TELEOP) {
+        int joyL = networkData.GetJoystickLeft();
+        int joyR = networkData.GetJoystickRight();
 
-void RobotMain::SetMotorSpeeds(int lMotor, int rMotor) {
-    cout << "Setting Motor Speeds L:" << lMotor << ", R:" << rMotor << endl;
-    emit SendData(QString("D:%1:%2").arg(lMotor, rMotor));
+        robotData.SetMotorValues(joyL, joyR);
+    } else if (networkData.GetCurrentRunMode() == FULL_AUTON || networkData.GetCurrentRunMode() == SAFE_AUTON) {
+        if (networkData.GetCurrentRunMode() == SAFE_AUTON && !networkClient.IsConnected()) {
+            robotData.SetMotorValues(0, 0);
+            return;
+        }
+
+        if (visionData.IsInMiningArea() && currentAutonMode == TO_MINING)
+            currentAutonMode = MINING;
+
+        if (visionData.IsInHomeArea() && currentAutonMode == TO_HOME)
+            currentAutonMode = HOME;
+
+        if (currentAutonMode == TO_MINING) {
+            if (visionData.IsInObstacleField()) {
+                //CODE FOR NAVIAGTION
+            } else {
+                //Code for Going to Mining Area
+            }
+        } //Repeat for TO_HOME -> Make modifiers for single code base?
+
+
+    }
 }

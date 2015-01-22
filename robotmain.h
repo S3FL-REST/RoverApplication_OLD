@@ -11,30 +11,42 @@
 #include "Network/networkclient.h"
 #include "Network/networkdata.h"
 
+#include "Vision/robotvision.h"
+
 #include <iostream>
 
 using namespace std;
+
+enum AUTONOMY_MODES {
+    TO_MINING,
+    MINING,
+    TO_HOME,
+    HOME,
+    END
+};
 
 class RobotMain : public QObject
 {
     Q_OBJECT
 public:
-    RobotMain(string);
+    RobotMain();
 
     void StartRunLoop();
     void StopRunLoop();
 
 private:
     RobotData robotData;
-    SerialWorker robotSerial;
 
     NetworkClient networkClient;
     NetworkData networkData;
 
+    RobotVision visionData;
+
     QTimer timer;
 
-    void SetMotorSpeeds(int, int);
+    AUTONOMY_MODES currentAutonMode;
 
+    void SetMotorSpeeds(int, int);
 
 signals:
     void SendData(QString);

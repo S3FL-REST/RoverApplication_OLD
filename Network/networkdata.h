@@ -15,6 +15,8 @@ public:
     NetworkData();
 
     run_mode GetCurrentRunMode();
+    int GetJoystickRight();
+    int GetJoystickLeft();
     void SetMotors(int new_left, int new_right);
 
 public slots:

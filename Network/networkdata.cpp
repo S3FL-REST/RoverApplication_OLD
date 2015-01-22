@@ -10,6 +10,14 @@ run_mode NetworkData::GetCurrentRunMode() {
     return currentRunMode;
 }
 
+int NetworkData::GetJoystickLeft() {
+    return joystick_left;
+}
+
+int NetworkData::GetJoystickRight() {
+    return joystick_right;
+}
+
 void NetworkData::SetMotors(int new_left, int new_right) {
     const int RANGE_LIMIT = 255;
 

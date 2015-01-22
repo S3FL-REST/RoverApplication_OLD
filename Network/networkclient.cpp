@@ -2,7 +2,7 @@
 
 const int NetworkClient::port = 3141;
 
-NetworkClient::NetworkClient() : server(this), socket(0) {
+NetworkClient::NetworkClient() : server(this), socket(NULL) {
     bool listening = server.listen(QHostAddress::Any, port);
     if (!listening) qDebug() << "Server failed to start";
 
@@ -11,6 +11,10 @@ NetworkClient::NetworkClient() : server(this), socket(0) {
     mThread = new QThread(this);
     this->moveToThread(mThread);
     mThread->start();
+}
+
+bool NetworkClient::IsConnected() {
+    return socket != NULL;
 }
 
 void NetworkClient::NewConnection() {
@@ -28,7 +32,7 @@ void NetworkClient::NewConnection() {
 
 void NetworkClient::SocketDisconnected() {
     qDebug() << "Socket " << socket->localAddress().toString() << " Disconnected";
-    socket = 0;
+    socket = NULL;
     emit ConnectionLost();
 }
 

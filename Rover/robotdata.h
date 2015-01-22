@@ -11,7 +11,16 @@
 
 #include <QDebug>
 
+#include "serialworker.h"
+
 using namespace std;
+
+enum IR_SENSORS {
+    F_R = 0,
+    F_L = 1,
+    B_R = 1,
+    B_L = 1,
+};
 
 class RobotData: public QObject
 {
@@ -19,22 +28,28 @@ class RobotData: public QObject
 
 public:
     RobotData();
-    void Print(ostream&);
+
+    double GetIRValue(int);
+
+    void SetMotorValues(int, int);
 
 private:
-    void InterpretDataType(string);
-    void ParseSingleData(string, vector<int>&);
+    vector<double> irValues;
 
-    vector<int> encoderValues;
-    vector<int> irValues;
-    vector<int> imuValues;
+    SerialWorker serialConnection;
 
-    static const int NUM_ENCODERS = 4;
+    static const string SERIAL_PORT;
+
     static const int NUM_IR_SENSORS = 4;
-    static const int NUM_IMU_DATA = 9;
+
+    static const double ROCK_LIMIT = 0.2;
+    static const double CRATER_LIMIT = 0.4;
 
 public slots:
     void ParseString(QString);
+
+signals:
+    void SendData(QString);
 };
 
 #endif // ROBOTDATA_H
