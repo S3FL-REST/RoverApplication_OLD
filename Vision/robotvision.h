@@ -21,6 +21,8 @@ public:
      double GetLimitMining();
 
      bool IsInObstacleField();
+     bool IsInMiningArea();
+     bool IsInHomeArea();
 
  private:
      double angle;
