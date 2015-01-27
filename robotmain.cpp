@@ -49,6 +49,7 @@ void RobotMain::RunLoop() {
                 //CODE FOR NAVIAGTION
             } else {
                 //Code for Going to Mining Area
+				//This is now changed
             }
         } //Repeat for TO_HOME -> Make modifiers for single code base?
 
