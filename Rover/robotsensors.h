@@ -1,6 +1,7 @@
-#ifndef ROBOTDATA_H
-#define ROBOTDATA_H
+#ifndef ROBOTSENSORS_H
+#define ROBOTSENSORS_H
 
+#include <QObject>
 #include <vector>
 #include <string>
 #include <sstream>
@@ -15,12 +16,12 @@
 
 using namespace std;
 
-class RobotData: public QObject
+class RobotSensors: public QObject
 {
     Q_OBJECT
 
 public:
-    RobotData();
+    RobotSensors();
 
     double GetIRValue(int);
 
@@ -45,4 +46,4 @@ signals:
     void SendData(QString);
 };
 
-#endif // ROBOTDATA_H
+#endif // ROBOTSENSORS_H
