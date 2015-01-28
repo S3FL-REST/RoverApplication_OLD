@@ -4,11 +4,11 @@
 #include <QObject>
 #include <QThread>
 
-#include <string>
-#include <SerialStream.h>
-#include <SerialStreamBuf.h>
+#include <QString>
 
 #include <vector>
+
+#include <SerialStream.h>
 
 #include <QDebug>
 
@@ -23,13 +23,13 @@ public:
     void Connect(string port);
     void Close();
 
-    string GetData();
+    QString GetData();
     bool IsConnected();
 
 private:
     SerialStream serial;
-    string currentData;
-    vector<string> previousCommands;
+    QString currentData;
+    QStringList dataList;
 
     int currentLostCount;
 

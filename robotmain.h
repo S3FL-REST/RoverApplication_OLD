@@ -7,6 +7,7 @@
 
 #include "Rover/serialworker.h"
 #include "Rover/robotdata.h"
+#include "Rover/robotsensors.h"
 
 #include "Network/networkclient.h"
 #include "Network/networkdata.h"
@@ -36,6 +37,7 @@ public:
 
 private:
     RobotData robotData;
+    RobotSensors robotSensors;
 
     NetworkClient networkClient;
     NetworkData networkData;
@@ -52,7 +54,6 @@ signals:
     void SendData(QString);
 
 private slots:
-    void RecievedData(QString);
     void RunLoop();
 };
 

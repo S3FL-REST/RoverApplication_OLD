@@ -1,13 +1,9 @@
 #ifndef ROBOTSENSORS_H
 #define ROBOTSENSORS_H
 
-#include <QObject>
-#include <vector>
-#include <string>
-#include <sstream>
-#include <stdlib.h>
-
 #include <QString>
+#include <QChar>
+
 #include <QObject>
 
 #include <QDebug>
@@ -15,6 +11,18 @@
 #include "serialworker.h"
 
 using namespace std;
+
+//IR Front Right = 0
+//IR Front Left = 1
+//IR Back Right = 2
+//IR Back Left = 3
+
+enum IR_SENSORS {
+    IR_FRONT_RIGHT = 0,
+    IR_FRONT_LEFT = 1,
+    IR_BACK_RIGHT = 2,
+    IR_BACK_LEFT = 3,
+};
 
 class RobotSensors: public QObject
 {
@@ -25,9 +33,10 @@ public:
 
     double GetIRValue(int);
 
-    void SetMotorValues(int, int);
-
 private:
+    void InterpretDataType(string);
+    void ParseSingleData(string, vector<int>&);
+
     vector<double> irValues;
 
     SerialWorker serialConnection;

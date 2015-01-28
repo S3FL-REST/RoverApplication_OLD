@@ -29,7 +29,7 @@ void SerialWorker::StartWorker(SerialWorker* worker) {
 
 void SerialWorker::GetData() {
     if (serialCon.IsConnected()) {
-        emit ReceivedData(serialCon.GetData().c_str());
+        emit ReceivedData(serialCon.GetData());
     }
     else {
         serialCon.Close();

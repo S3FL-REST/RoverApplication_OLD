@@ -1,6 +1,6 @@
 #include "robotmain.h"
 
-RobotMain::RobotMain() : robotData(), networkClient(), networkData(), visionData(), timer(this) {
+RobotMain::RobotMain() : robotData(), robotSensors(), networkClient(), networkData(), visionData(), timer(this) {
     //Connect signals and slots for network
     connect(&networkClient, SIGNAL(DataReceived(QByteArray)), &networkData, SLOT(ParseDataString(QByteArray)));
     connect(&networkClient, SIGNAL(ConnectionLost()), &networkData, SLOT(ResetToDefaults()));
@@ -10,10 +10,6 @@ RobotMain::RobotMain() : robotData(), networkClient(), networkData(), visionData
     connect(&timer, SIGNAL(timeout()), this, SLOT(RunLoop()));
 
     currentAutonMode = TO_MINING;
-}
-
-void RobotMain::RecievedData(QString data) {
-    robotData.ParseString(data);
 }
 
 void RobotMain::StartRunLoop() {
@@ -47,12 +43,12 @@ void RobotMain::RunLoop() {
         if (currentAutonMode == TO_MINING) {
             if (visionData.IsInObstacleField()) {
                 //CODE FOR NAVIAGTION
+
+
             } else {
                 //Code for Going to Mining Area
 				//This is now changed
             }
         } //Repeat for TO_HOME -> Make modifiers for single code base?
-
-
     }
 }

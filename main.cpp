@@ -13,9 +13,6 @@ int main(int argc, char *argv[])
 
     GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-    cout << "TEST WITH SERIAL AGAIN!!!" << endl << endl;
-    cout << "Switch to ProtoBuf or similar for Serial Connections" << endl << endl;
-
     RobotMain robot;
     robot.StartRunLoop();
 

@@ -3,7 +3,7 @@
 //Maximum Lost Count for Data Packets before Connection Close
 const int SerialConnection::MAX_LOST_COUNT = 50;
 
-SerialConnection::SerialConnection() : currentData(""), previousCommands(0), currentLostCount(0) {
+SerialConnection::SerialConnection() : currentData(""), dataList(), currentLostCount(0) {
     //Empty Constructor
 }
 
@@ -33,7 +33,7 @@ void SerialConnection::SendData(QString data) {
 }
 
 //Gets all data in serial buffer and returns latest complete command
-string SerialConnection::GetData() {
+QString SerialConnection::GetData() {
     if (!IsConnected())
         return "";
 
@@ -43,14 +43,13 @@ string SerialConnection::GetData() {
         currentLostCount = 0;
 
         while (serial.rdbuf()->in_avail() > 0) {
+
+
             serial.get(next_byte);
             currentData.push_back(next_byte);
 
-            if (next_byte == ']') {
-                serial.ignore(1);
-                currentData.push_back('\n');
-
-                previousCommands.push_back(currentData);
+            if (next_byte == '\n') {
+                dataList.push_back(currentData);
                 currentData.clear();
             }
         }
@@ -59,11 +58,10 @@ string SerialConnection::GetData() {
         else currentLostCount++;
     }
 
-    if (!previousCommands.empty()) {
-        string dataToSend = previousCommands.back();
-        previousCommands.clear();
-
-        return dataToSend;
+    if (!dataList.empty()) {
+        QString datas = dataList.join("");
+        dataList.clear();
+        return datas;
     } else {
         return "";
     }
