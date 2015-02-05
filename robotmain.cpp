@@ -45,6 +45,8 @@ void RobotMain::RunLoop() {
             return;
         }
 
+        //Switch Modes if Necessary
+
         if (visionData.IsInMiningArea() && currentAutonMode == TO_MINING)
             currentAutonMode = MINING;
 
@@ -59,6 +61,9 @@ void RobotMain::RunLoop() {
         int rMotor = MAX_SPEED;
 
         if (currentAutonMode == TO_MINING || currentAutonMode == TO_HOME) {
+
+            //Set IR Values
+
             double irLeft, irRight;
 
             if (currentAutonMode == TO_MINING) {
@@ -68,6 +73,8 @@ void RobotMain::RunLoop() {
                 irLeft = robotSensors.GetIRValue(IR_BACK_RIGHT);
                 irRight = robotSensors.GetIRValue(IR_BACK_LEFT);
             }
+
+            //Target Finding and Traversal
 
             double robotTurnRatio = abs((visionData.GetRobotAngle() - MAX_ANGLE) / MAX_ANGLE);
 
@@ -89,15 +96,39 @@ void RobotMain::RunLoop() {
 
             if (irRight > robotSensors.CRATER_LIMIT && irRight < robotSensors.ROCK_LIMIT)
                 lMotor = -lMotor;
-        }
 
-        if (currentAutonMode == TO_MINING)
-            robotData.SetMotorValues(lMotor, rMotor);
-        else if (currentAutonMode == TO_HOME)
-            robotData.SetMotorValues(-rMotor, -lMotor);
-        else {
-            qDebug() << "DID NOT SET MOTOR VALUES -> UNKNOWN STATE";
-            robotData.SetMotorValues(0, 0);
+            //Set Motor Values
+
+            if (currentAutonMode == TO_MINING)
+                robotData.SetMotorValues(lMotor, rMotor);
+            else if (currentAutonMode == TO_HOME)
+                robotData.SetMotorValues(-rMotor, -lMotor);
+            else {
+                qDebug() << "DID NOT SET MOTOR VALUES -> UNKNOWN STATE";
+                robotData.SetMotorValues(0, 0);
+            }
+
+        }  else if (currentAutonMode == MINING) {
+            //Insert Mining Code HERE
+
+            // 1. Go to specific mining site
+            // 2. Mine
+            // 3. Go Home
+
+            //Call this at end to switch to returning home:
+            currentAutonMode = TO_HOME;
+
+        } else if (currentAutonMode == HOME) {
+            //Insert Code for Going to collection bin and dumping
+
+            // 1. Go to collection bin
+            // 2. Dump
+            // 3. Go to mining site
+
+            //Call this at end to switch to going to mining
+            currentAutonMode = TO_MINING;
+        } else {
+            assert(0);
         }
     }
 }
