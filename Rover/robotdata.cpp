@@ -20,4 +20,5 @@ void RobotData::ParseString(QString data) {
 
 void RobotData::SetMotorValues(int left, int right) {
     emit SendData(QString("d:%1:%2").arg(left, right));
+    qDebug() << "Setting L:R to " << left << ":" << right;
 }

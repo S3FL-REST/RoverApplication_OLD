@@ -34,3 +34,7 @@ void RobotSensors::ParseString(QString data) {
 double RobotSensors::GetIRValue(int index) {
     return irValues.at(index);
 }
+
+double RobotSensors::GetIRValue(IR_SENSORS index) {
+    return irValues.at(static_cast<int>(index));
+}

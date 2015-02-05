@@ -32,6 +32,10 @@ public:
     RobotSensors();
 
     double GetIRValue(int);
+    double GetIRValue(IR_SENSORS);
+
+    static const double ROCK_LIMIT = 0.2;
+    static const double CRATER_LIMIT = 0.4;
 
 private:
     void InterpretDataType(string);
@@ -44,9 +48,6 @@ private:
     static const string SERIAL_PORT;
 
     static const int NUM_IR_SENSORS = 4;
-
-    static const double ROCK_LIMIT = 0.2;
-    static const double CRATER_LIMIT = 0.4;
 
 public slots:
     void ParseString(QString);

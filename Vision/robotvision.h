@@ -9,11 +9,20 @@ public:
     RobotVision ();
 
      void SetAngleAndDistance (double, double);
+     void SetRobotAngle(double);
+     void SetTrackingTarget(bool);
 
+     //Returns theta of robot from dump site
      double GetAngle();
+
+     //Returns distance of robot from dump site
      double GetDistance();
 
+     //Returns angle of robot
+     double GetRobotAngle();
+
      double GetLinearDistance();
+     double GetHorizontalDistance();
 
      bool IsTracking();
 
@@ -27,6 +36,7 @@ public:
  private:
      double angle;
      double distance;
+     double robotAngle;
 
      double isTrackingCamera;
 
