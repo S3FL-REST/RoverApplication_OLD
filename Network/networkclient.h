@@ -9,10 +9,6 @@
 
 #include <QDebug>
 
-#include "Protocols/rest_network.pb.h"
-
-using namespace rest_network;
-
 class NetworkClient : public QObject
 {
     Q_OBJECT

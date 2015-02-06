@@ -33,17 +33,15 @@ void NetworkData::SetMotors(int new_left, int new_right) {
 }
 
 void NetworkData::ParseDataString(QByteArray data) {
-    ControlNetworkData controlData;
-    controlData.ParseFromArray(data, data.length());
+    rest_network controlData;
 
-    if (controlData.has_mode())
-        currentRunMode = controlData.mode();
+    if (controlData.ParseString(QString(data))) {
+        currentRunMode = controlData.GetRunMode();
+        joystick_left = controlData.GetLeftJoystick();
+        joystick_right = controlData.GetRightJoystick();
 
-    if (controlData.has_joy_left())
-        joystick_left = controlData.joy_left();
-
-    if (controlData.has_joy_right())
-        joystick_right = controlData.joy_right();
+        qDebug() << joystick_left << ", " << joystick_right << ", " << currentRunMode;
+    }
 }
 
 void NetworkData::ResetToDefaults() {

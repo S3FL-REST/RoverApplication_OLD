@@ -22,9 +22,9 @@ SOURCES += main.cpp \
     robotmain.cpp \
     Network/networkclient.cpp \
     Network/networkdata.cpp \
-    Protocols/rest_network.pb.cc \
     Vision/robotvision.cpp \
-    Rover/robotsensors.cpp
+    Rover/robotsensors.cpp \
+    Protocols/rest_network.cpp
 
 HEADERS += \
     Rover/robotdata.h \
@@ -36,7 +36,8 @@ HEADERS += \
     Network/networkdata.h \
     Protocols/rest_network.pb.h \
     Vision/robotvision.h \
-    Rover/robotsensors.h
+    Rover/robotsensors.h \
+    Protocols/rest_network.h
 
 unix:!macx: LIBS += -lserial
 unix:!macx: LIBS += -lprotobuf

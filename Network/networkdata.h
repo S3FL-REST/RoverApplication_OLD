@@ -2,10 +2,10 @@
 #define NETWORKDATA_H
 
 #include <QObject>
-#include "Protocols/rest_network.pb.h"
+#include "Protocols/rest_network.h"
 
 using namespace std;
-using namespace rest_network;
+
 
 class NetworkData : public QObject
 {
