@@ -38,10 +38,10 @@ void RobotMain::RunLoop() {
         int joyL = networkData.GetJoystickLeft();
         int joyR = networkData.GetJoystickRight();
 
-        robotData.SetMotorValues(joyL, joyR);
+        robotSensors.SetMotorValues(joyL, joyR);
     } else if (networkData.GetCurrentRunMode() == FULL_AUTON || networkData.GetCurrentRunMode() == SAFE_AUTON) {
         if (networkData.GetCurrentRunMode() == SAFE_AUTON && !networkClient.IsConnected()) {
-            robotData.SetMotorValues(0, 0);
+            robotSensors.SetMotorValues(0, 0);
             return;
         }
 
@@ -100,12 +100,12 @@ void RobotMain::RunLoop() {
             //Set Motor Values
 
             if (currentAutonMode == TO_MINING)
-                robotData.SetMotorValues(lMotor, rMotor);
+                robotSensors.SetMotorValues(lMotor, rMotor);
             else if (currentAutonMode == TO_HOME)
-                robotData.SetMotorValues(-rMotor, -lMotor);
+                robotSensors.SetMotorValues(-rMotor, -lMotor);
             else {
                 qDebug() << "DID NOT SET MOTOR VALUES -> UNKNOWN STATE";
-                robotData.SetMotorValues(0, 0);
+                robotSensors.SetMotorValues(0, 0);
             }
 
         }  else if (currentAutonMode == MINING) {

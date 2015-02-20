@@ -31,6 +31,11 @@ void RobotSensors::ParseString(QString data) {
     }
 }
 
+void RobotSensors::SetMotorValues(int left, int right) {
+    emit SendData(QString("d:%1:%2\n").arg(left, right));
+    qDebug() << "Setting L:R to " << left << ":" << right;
+}
+
 double RobotSensors::GetIRValue(int index) {
     return irValues.at(index);
 }

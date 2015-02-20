@@ -50,6 +50,7 @@ void NetworkData::ResetToDefaults() {
     right = 0;
     joystick_left = 0;
     joystick_right = 0;
+
 }
 
 void NetworkData::Print(ostream &out) {

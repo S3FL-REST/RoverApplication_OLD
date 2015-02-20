@@ -37,6 +37,8 @@ public:
     static const double ROCK_LIMIT = 0.2;
     static const double CRATER_LIMIT = 0.4;
 
+    void SetMotorValues(int, int);
+
 private:
     void InterpretDataType(string);
     void ParseSingleData(string, vector<int>&);

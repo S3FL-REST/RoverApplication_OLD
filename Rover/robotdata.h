@@ -17,11 +17,7 @@ class RobotData: public QObject
 public:
     RobotData();
 
-    void SetMotorValues(int, int);
-
 private:
-    vector<double> irValues;
-
     SerialWorker serialConnection;
 
     static const string SERIAL_PORT;
