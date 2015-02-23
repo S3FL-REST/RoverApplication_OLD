@@ -40,4 +40,3 @@ HEADERS += \
     Protocols/rest_network.h
 
 unix:!macx: LIBS += -lserial
-unix:!macx: LIBS += -lprotobuf
