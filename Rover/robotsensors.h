@@ -51,6 +51,9 @@ private:
 
     static const int NUM_IR_SENSORS = 4;
 
+    int currentLeft;
+    int currentRight;
+
 public slots:
     void ParseString(QString);
 

@@ -29,7 +29,10 @@ bool SerialConnection::IsConnected() {
 
 //Sends string data through serial
 void SerialConnection::SendData(QString data) {
-    if (IsConnected()) serial << data.toStdString().c_str();
+    if (IsConnected()) {
+        serial << data.toStdString().c_str();
+        serial.flush();
+    }
 }
 
 //Gets all data in serial buffer and returns latest complete command
