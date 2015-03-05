@@ -40,7 +40,7 @@ void NetworkData::ParseDataString(QByteArray data) {
         joystick_left = controlData.GetLeftJoystick();
         joystick_right = controlData.GetRightJoystick();
 
-        qDebug() << joystick_left << ", " << joystick_right << ", " << currentRunMode;
+        //qDebug() << joystick_left << ", " << joystick_right << ", " << currentRunMode;
     }
 }
 
