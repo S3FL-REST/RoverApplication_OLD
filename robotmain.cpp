@@ -34,7 +34,9 @@ static const int MAX_SPEED = 200;
 static const int MAX_TURN_DIFFERENCE = 50;
 
 void RobotMain::RunLoop() {
-    if (networkData.GetCurrentRunMode() == TELEOP) {
+    if (networkData.GetCurrentRunMode() == STOP) {
+        robotSensors.SetMotorValues(0, 0);
+    } else if (networkData.GetCurrentRunMode() == TELEOP) {
         int joyL = networkData.GetJoystickLeft();
         int joyR = networkData.GetJoystickRight();
 
