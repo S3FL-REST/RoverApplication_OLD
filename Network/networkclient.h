@@ -17,6 +17,8 @@ public:
 
     bool IsConnected();
 
+    ~NetworkClient();
+
 private:
     QTcpServer server;
     QTcpSocket *socket;

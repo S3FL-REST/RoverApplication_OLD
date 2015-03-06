@@ -1,30 +1,28 @@
 #include "serialworker.h"
 
-SerialWorker::SerialWorker(string port) : serialCon(), timer(this), port(port) {
+SerialWorker::SerialWorker(string port) : serialCon(), timer(), port(port) {
+    //Create a new thread and move this and the serial connection object to that thread
+    mThread = new QThread(this);
+    moveToThread(mThread);
+    serialCon.moveToThread(mThread);
+
+    mThread->start();
+
+    connect(mThread, SIGNAL(finished()), mThread, SLOT(deleteLater()));
+
     connect(&timer, SIGNAL(timeout()), this, SLOT(GetData()));
 
     connect(this, SIGNAL(SendDataToSerial(QString)), &serialCon, SLOT(SendData(QString)));
 
     connect(QCoreApplication::instance(), SIGNAL(aboutToQuit()), this, SLOT(StopThread()));
 
-    //Create a new thread and move this and the serial connection object to that thread
-    mThread = new QThread(this);
-    moveToThread(mThread);
-    serialCon.moveToThread(mThread);
-
-    connect(mThread, SIGNAL(finished()), mThread, SLOT(deleteLater()));
-
-    mThread->start();
+    Start();
 }
 
 void SerialWorker::Start() {
     if (serialCon.IsConnected()) serialCon.Close();
     serialCon.Connect(port);
     timer.start(50);
-}
-
-void SerialWorker::StartWorker(SerialWorker* worker) {
-    QMetaObject::invokeMethod(worker, "Start", Qt::QueuedConnection);
 }
 
 void SerialWorker::GetData() {
@@ -59,12 +57,8 @@ void SerialWorker::Stop() {
 }
 
 void SerialWorker::StopThread() {
-    StopWorker(this);
+    Stop();
     mThread->quit();
-}
-
-void SerialWorker::StopWorker(SerialWorker* worker) {
-    QMetaObject::invokeMethod(worker, "Stop", Qt::QueuedConnection);
 }
 
 SerialWorker::~SerialWorker() {

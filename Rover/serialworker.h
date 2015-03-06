@@ -23,9 +23,6 @@ public:
     bool IsConnected();
     ~SerialWorker();
 
-    static void StartWorker(SerialWorker*);
-    static void StopWorker(SerialWorker*);
-
 protected:
     SerialConnection serialCon;
     QTimer timer;

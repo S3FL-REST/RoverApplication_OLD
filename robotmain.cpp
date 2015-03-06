@@ -1,8 +1,8 @@
 #include "robotmain.h"
 
-#include "Vision/camera.h"
+#include <QCoreApplication>
 
-RobotMain::RobotMain() : robotData(), robotSensors(), networkClient(), networkData(), visionData(), timer(this) {
+RobotMain::RobotMain() : robotData(), robotSensors(), networkClient(), networkData(), visionData(), timer() {
     //Connect signals and slots for network
     connect(&networkClient, SIGNAL(DataReceived(QByteArray)), &networkData, SLOT(ParseDataString(QByteArray)));
     connect(&networkClient, SIGNAL(ConnectionLost()), &networkData, SLOT(ResetToDefaults()));
@@ -15,9 +15,6 @@ RobotMain::RobotMain() : robotData(), robotSensors(), networkClient(), networkDa
     currentAutonMode = TO_MINING;
 
     //TODO: NEED A VISION LOOP
-
-    Camera c;
-    c.CaptureImage();
 }
 
 void RobotMain::StartRunLoop() {
@@ -40,13 +37,19 @@ static const int MAX_TURN_DIFFERENCE = 50;
 
 void RobotMain::RunLoop() {
     if (networkData.GetCurrentRunMode() == STOP) {
+        //Stop for no connection
         robotSensors.SetMotorValues(0, 0);
+
     } else if (networkData.GetCurrentRunMode() == TELEOP) {
+        //Set joystick data for Teleop
+
         int joyL = networkData.GetJoystickLeft();
         int joyR = networkData.GetJoystickRight();
 
         robotSensors.SetMotorValues(joyL, joyR);
     } else if (networkData.GetCurrentRunMode() == FULL_AUTON || networkData.GetCurrentRunMode() == SAFE_AUTON) {
+        //Check if is connected for safe-mode
+
         if (networkData.GetCurrentRunMode() == SAFE_AUTON && !networkClient.IsConnected()) {
             robotSensors.SetMotorValues(0, 0);
             return;

@@ -45,9 +45,13 @@ void NetworkData::ParseDataString(QByteArray data) {
 }
 
 void NetworkData::ResetToDefaults() {
-    currentRunMode = STOP;
-    left = 0;
-    right = 0;
+    if (currentRunMode != FULL_AUTON) {
+        currentRunMode = STOP;
+        left = 0;
+        right = 0;
+    }
+
+
     joystick_left = 0;
     joystick_right = 0;
 

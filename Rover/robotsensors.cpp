@@ -6,9 +6,6 @@ RobotSensors::RobotSensors() : irValues(NUM_IR_SENSORS, 0.0), serialConnection(S
     //Connect signals and slots for serial object
     connect(this, SIGNAL(SendData(QString)), &serialConnection, SLOT(SendData(QString)));
     connect(&serialConnection, SIGNAL(ReceivedData(QString)), this, SLOT(ParseString(QString)));
-
-    //Start the robotSerial thread
-    SerialWorker::StartWorker(&serialConnection);
 }
 
 //Parses a formatted string into sensor data objects

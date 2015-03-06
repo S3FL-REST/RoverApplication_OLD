@@ -9,9 +9,6 @@ RobotData::RobotData() : serialConnection(SERIAL_PORT) {
     //Connect signals and slots for serial object
     connect(this, SIGNAL(SendData(QString)), &serialConnection, SLOT(SendData(QString)));
     connect(&serialConnection, SIGNAL(ReceivedData(QString)), this, SLOT(ParseString(QString)));
-
-    //Start the robotSerial thread
-    SerialWorker::StartWorker(&serialConnection);
 }
 
 void RobotData::ParseString(QString data) {
