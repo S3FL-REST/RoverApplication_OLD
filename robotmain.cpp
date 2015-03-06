@@ -1,5 +1,7 @@
 #include "robotmain.h"
 
+#include "Vision/camera.h"
+
 RobotMain::RobotMain() : robotData(), robotSensors(), networkClient(), networkData(), visionData(), timer(this) {
     //Connect signals and slots for network
     connect(&networkClient, SIGNAL(DataReceived(QByteArray)), &networkData, SLOT(ParseDataString(QByteArray)));
@@ -13,6 +15,9 @@ RobotMain::RobotMain() : robotData(), robotSensors(), networkClient(), networkDa
     currentAutonMode = TO_MINING;
 
     //TODO: NEED A VISION LOOP
+
+    Camera c;
+    c.CaptureImage();
 }
 
 void RobotMain::StartRunLoop() {

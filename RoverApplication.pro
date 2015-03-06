@@ -4,8 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core
-QT       += network
+QT       += core network
 QT       -= gui
 
 TARGET = RoverApplication
@@ -24,7 +23,8 @@ SOURCES += main.cpp \
     Network/networkdata.cpp \
     Vision/robotvision.cpp \
     Rover/robotsensors.cpp \
-    Protocols/rest_network.cpp
+    Protocols/rest_network.cpp \
+    Vision/camera.cpp
 
 HEADERS += \
     Rover/robotdata.h \
@@ -37,6 +37,7 @@ HEADERS += \
     Protocols/rest_network.pb.h \
     Vision/robotvision.h \
     Rover/robotsensors.h \
-    Protocols/rest_network.h
+    Protocols/rest_network.h \
+    Vision/camera.h
 
 unix:!macx: LIBS += -lserial
