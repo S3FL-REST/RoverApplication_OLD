@@ -9,13 +9,19 @@ Camera::Camera(int device) : /*camera(device)*/ camera(device), future(), watche
     }
 
     isOpen = counter != 10;
+    newImage = false;
 }
 
 bool Camera::IsOpen() const {
     return camera.isOpened() && isOpen && !currentImage.isNull();
 }
 
-QImage Camera::GetCurrentImage() const {
+bool Camera::HasNewImage() const {
+    return newImage;
+}
+
+QImage Camera::GetCurrentImage() {
+    newImage = false;
     return currentImage;
 }
 
@@ -76,5 +82,7 @@ void Camera::ImageReceived() {
     delete watcher;
     watcher = NULL;
 
-    //currentImage.save("/home/rest/Desktop/test.jpg", "JPG");
+    newImage = true;
+
+    currentImage.save("/home/rest/Desktop/test.jpg", "JPG");
 }

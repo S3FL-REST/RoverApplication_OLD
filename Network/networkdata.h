@@ -19,7 +19,7 @@ public:
     int GetJoystickLeft();
     void SetMotors(int new_left, int new_right);
 
-    void SendPicture(QImage&);
+    void SendPicture(QImage);
 
 signals:
     void SendData(QByteArray);

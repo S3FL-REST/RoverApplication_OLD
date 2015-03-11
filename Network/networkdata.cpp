@@ -32,7 +32,7 @@ void NetworkData::SetMotors(int new_left, int new_right) {
         qDebug() << "Right Range out of Bounds: " << new_right;
 }
 
-void NetworkData::SendPicture(QImage &image) {
+void NetworkData::SendPicture(QImage image) {
     rest_network_pic network;
     network.SetImage(image);
 

@@ -163,6 +163,8 @@ void RobotMain::RunLoop() {
 void RobotMain::VisionLoop() {
     camera_front_right.CaptureImage();
 
+    if (camera_front_right.HasNewImage())
+        networkData.SendPicture(camera_front_right.GetCurrentImage());
 }
 
 void RobotMain::SlowLoop() {

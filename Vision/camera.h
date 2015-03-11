@@ -20,13 +20,15 @@ public:
     Camera(int device);
 
     bool IsOpen() const;
+    bool HasNewImage() const;
     void CaptureImage();
 
-    QImage GetCurrentImage() const;
+    QImage GetCurrentImage();
 
 private:
     VideoCapture camera;
     bool isOpen;
+    bool newImage;
 
     QImage currentImage;
 

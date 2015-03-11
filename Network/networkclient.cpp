@@ -49,8 +49,10 @@ void NetworkClient::SocketDisconnected() {
 }
 
 void NetworkClient::SendData(QByteArray data) {
-    socket->write(data);
-    socket->flush();
+    if (IsConnected()) {
+        socket->write(data);
+        socket->flush();
+    }
 }
 
 void NetworkClient::DataReady() {
