@@ -84,5 +84,5 @@ void Camera::ImageReceived() {
 
     newImage = true;
 
-    currentImage.save("/home/rest/Desktop/test.jpg", "JPG");
+    //currentImage.save("/home/rest/Desktop/test.jpg", "JPG");
 }
