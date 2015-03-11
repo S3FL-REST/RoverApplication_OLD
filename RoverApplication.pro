@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core network
+QT       += core network multimedia
 QT       -= gui
 
 TARGET = RoverApplication
@@ -41,3 +41,8 @@ HEADERS += \
     Vision/camera.h
 
 unix:!macx: LIBS += -lserial
+
+unix {
+    CONFIG += link_pkgconfig
+    PKGCONFIG += opencv
+}

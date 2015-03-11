@@ -6,6 +6,10 @@
 
 #include <QByteArray>
 
+#include <QImage>
+#include <QBuffer>
+#include <QDataStream>
+
 enum run_mode {
   STOP = 0,
   TELEOP = 1,
@@ -21,10 +25,12 @@ public:
     void SetLeftJoystick(int);
     void SetRightJoystick(int);
     void SetRunMode(run_mode);
+    void SetImage(QImage);
 
     int GetLeftJoystick();
     int GetRightJoystick();
     run_mode GetRunMode();
+    QImage GetImage();
 
     QByteArray ToByteArray();
     bool ParseString(QString);
@@ -34,6 +40,9 @@ private:
     int left_joystick;
     int right_joystick;
     run_mode current_mode;
+    QImage image;
+
+    bool new_picture;
 };
 
 #endif // REST_NETWORK_H

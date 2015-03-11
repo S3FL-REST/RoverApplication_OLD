@@ -12,6 +12,7 @@
 #include "Network/networkclient.h"
 #include "Network/networkdata.h"
 
+#include "Vision/camera.h"
 #include "Vision/robotvision.h"
 
 #include <iostream>
@@ -46,6 +47,9 @@ private:
     RobotVision visionData;
 
     QTimer timer;
+    QTimer visionTimer;
+
+    Camera camera_front_right;
 
     AUTONOMY_MODES currentAutonMode;
 
@@ -56,6 +60,7 @@ signals:
 
 private slots:
     void RunLoop();
+    void VisionLoop();
 };
 
 #endif // ROBOTMAIN_H

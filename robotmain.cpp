@@ -2,7 +2,12 @@
 
 #include <QCoreApplication>
 
-RobotMain::RobotMain() : robotData(), robotSensors(), networkClient(), networkData(), visionData(), timer() {
+RobotMain::RobotMain()
+    : robotData(), robotSensors(),
+      networkClient(), networkData(),
+      visionData(),
+      timer(), visionTimer(),
+      camera_front_right(1) {
     //Connect signals and slots for network
     connect(&networkClient, SIGNAL(DataReceived(QByteArray)), &networkData, SLOT(ParseDataString(QByteArray)));
     connect(&networkClient, SIGNAL(ConnectionLost()), &networkData, SLOT(ResetToDefaults()));
@@ -11,19 +16,23 @@ RobotMain::RobotMain() : robotData(), robotSensors(), networkClient(), networkDa
     timer.setInterval(5);
     connect(&timer, SIGNAL(timeout()), this, SLOT(RunLoop()));
 
+    //Set the vision timer interval and connect the timer to event for vision loop
+    visionTimer.setInterval(500);
+    connect(&visionTimer, SIGNAL(timeout()), this, SLOT(VisionLoop()));
+
     //Set Current Auton Mode
     currentAutonMode = TO_MINING;
-
-    //TODO: NEED A VISION LOOP
 }
 
 void RobotMain::StartRunLoop() {
     timer.start();
+    visionTimer.start();
     cout << "Starting Main Run Loop" << endl;
 }
 
 void RobotMain::StopRunLoop() {
     timer.stop();
+    visionTimer.stop();
     cout << "Stopping Main Run Loop" << endl;
 }
 
@@ -141,4 +150,8 @@ void RobotMain::RunLoop() {
             assert(0);
         }
     }
+}
+
+void RobotMain::VisionLoop() {
+    camera_front_right.CaptureImage();
 }
