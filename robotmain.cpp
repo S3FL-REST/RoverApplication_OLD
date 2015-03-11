@@ -6,10 +6,11 @@ RobotMain::RobotMain()
     : robotData(), robotSensors(),
       networkClient(), networkData(),
       visionData(),
-      timer(), visionTimer(),
-      camera_front_right(1) {
+      timer(), visionTimer(), slowTimer(),
+      camera_front_right(0) {
     //Connect signals and slots for network
     connect(&networkClient, SIGNAL(DataReceived(QByteArray)), &networkData, SLOT(ParseDataString(QByteArray)));
+    connect(&networkData, SIGNAL(SendData(QByteArray)), &networkClient, SLOT(SendData(QByteArray)));
     connect(&networkClient, SIGNAL(ConnectionLost()), &networkData, SLOT(ResetToDefaults()));
 
     //Set the timer interval and connect the timer event to the robot run loop
@@ -17,8 +18,12 @@ RobotMain::RobotMain()
     connect(&timer, SIGNAL(timeout()), this, SLOT(RunLoop()));
 
     //Set the vision timer interval and connect the timer to event for vision loop
-    visionTimer.setInterval(500);
+    visionTimer.setInterval(100);
     connect(&visionTimer, SIGNAL(timeout()), this, SLOT(VisionLoop()));
+
+    //Set the slow timer interval and connect for periodic tasks
+    slowTimer.setInterval(1000);
+    connect(&slowTimer, SIGNAL(timeout()), this, SLOT(SlowLoop()));
 
     //Set Current Auton Mode
     currentAutonMode = TO_MINING;
@@ -27,12 +32,14 @@ RobotMain::RobotMain()
 void RobotMain::StartRunLoop() {
     timer.start();
     visionTimer.start();
+    slowTimer.start();
     cout << "Starting Main Run Loop" << endl;
 }
 
 void RobotMain::StopRunLoop() {
     timer.stop();
     visionTimer.stop();
+    slowTimer.stop();
     cout << "Stopping Main Run Loop" << endl;
 }
 
@@ -45,6 +52,7 @@ static const int MAX_SPEED = 200;
 static const int MAX_TURN_DIFFERENCE = 50;
 
 void RobotMain::RunLoop() {
+
     if (networkData.GetCurrentRunMode() == STOP) {
         //Stop for no connection
         robotSensors.SetMotorValues(0, 0);
@@ -154,4 +162,16 @@ void RobotMain::RunLoop() {
 
 void RobotMain::VisionLoop() {
     camera_front_right.CaptureImage();
+
+}
+
+void RobotMain::SlowLoop() {
+    double currentTemp = TemperatureMonitor::GetTemperature();
+
+    //qDebug() << currentTemp;
+
+    if (currentTemp > TemperatureMonitor::CRITICAL_TEMP) {
+        qDebug() << "Shutdown!!!";
+        assert(0);
+    }
 }

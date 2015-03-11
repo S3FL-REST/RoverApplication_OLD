@@ -32,6 +32,7 @@ signals:
 
 public slots:
     void NewConnection();
+    void SendData(QByteArray);
 
 private slots:
     void SocketDisconnected();

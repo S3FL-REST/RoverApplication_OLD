@@ -25,14 +25,12 @@ public:
     void SetLeftJoystick(int);
     void SetRightJoystick(int);
     void SetRunMode(run_mode);
-    void SetImage(QImage);
 
-    int GetLeftJoystick();
-    int GetRightJoystick();
-    run_mode GetRunMode();
-    QImage GetImage();
+    int GetLeftJoystick() const;
+    int GetRightJoystick() const;
+    run_mode GetRunMode() const;
 
-    QByteArray ToByteArray();
+    QByteArray ToByteArray() const;
     bool ParseString(QString);
 
 
@@ -40,6 +38,22 @@ private:
     int left_joystick;
     int right_joystick;
     run_mode current_mode;
+};
+
+class rest_network_pic
+{
+public:
+    rest_network_pic();
+
+    void SetImage(QImage&);
+
+    QImage GetImage() const;
+    bool HasNewImage() const;
+
+    QByteArray ToByteArray() const;
+    bool ParseString(QString);
+
+private:
     QImage image;
 
     bool new_picture;

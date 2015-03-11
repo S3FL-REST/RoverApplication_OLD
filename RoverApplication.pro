@@ -24,7 +24,8 @@ SOURCES += main.cpp \
     Vision/robotvision.cpp \
     Rover/robotsensors.cpp \
     Protocols/rest_network.cpp \
-    Vision/camera.cpp
+    Vision/camera.cpp \
+    Computer/temperaturemonitor.cpp
 
 HEADERS += \
     Rover/robotdata.h \
@@ -38,7 +39,8 @@ HEADERS += \
     Vision/robotvision.h \
     Rover/robotsensors.h \
     Protocols/rest_network.h \
-    Vision/camera.h
+    Vision/camera.h \
+    Computer/temperaturemonitor.h
 
 unix:!macx: LIBS += -lserial
 

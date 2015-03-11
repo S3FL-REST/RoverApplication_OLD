@@ -48,6 +48,11 @@ void NetworkClient::SocketDisconnected() {
     emit ConnectionLost();
 }
 
+void NetworkClient::SendData(QByteArray data) {
+    socket->write(data);
+    socket->flush();
+}
+
 void NetworkClient::DataReady() {
     QByteArray data = "";
 

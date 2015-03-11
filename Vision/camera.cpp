@@ -1,6 +1,6 @@
 #include "camera.h"
 
-Camera::Camera(int device) : /*camera(device)*/ camera("/home/ian/Downloads/sample_iTunes.mov"), future(), watcher(0) {
+Camera::Camera(int device) : /*camera(device)*/ camera(device), future(), watcher(0) {
     int counter = 0;
 
     while (!camera.isOpened() && counter < 10) {
@@ -76,5 +76,5 @@ void Camera::ImageReceived() {
     delete watcher;
     watcher = NULL;
 
-    currentImage.save("/home/ian/Desktop/test.jpg", "JPG");
+    //currentImage.save("/home/rest/Desktop/test.jpg", "JPG");
 }

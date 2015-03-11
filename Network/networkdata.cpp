@@ -32,6 +32,13 @@ void NetworkData::SetMotors(int new_left, int new_right) {
         qDebug() << "Right Range out of Bounds: " << new_right;
 }
 
+void NetworkData::SendPicture(QImage &image) {
+    rest_network_pic network;
+    network.SetImage(image);
+
+    emit SendData(network.ToByteArray());
+}
+
 void NetworkData::ParseDataString(QByteArray data) {
     rest_network controlData;
 
@@ -39,8 +46,6 @@ void NetworkData::ParseDataString(QByteArray data) {
         currentRunMode = controlData.GetRunMode();
         joystick_left = controlData.GetLeftJoystick();
         joystick_right = controlData.GetRightJoystick();
-
-        //qDebug() << joystick_left << ", " << joystick_right << ", " << currentRunMode;
     }
 }
 
@@ -50,7 +55,6 @@ void NetworkData::ResetToDefaults() {
         left = 0;
         right = 0;
     }
-
 
     joystick_left = 0;
     joystick_right = 0;

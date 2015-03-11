@@ -5,6 +5,8 @@
 #include <QString>
 #include <QTimer>
 
+#include "Computer/temperaturemonitor.h"
+
 #include "Rover/serialworker.h"
 #include "Rover/robotdata.h"
 #include "Rover/robotsensors.h"
@@ -48,6 +50,7 @@ private:
 
     QTimer timer;
     QTimer visionTimer;
+    QTimer slowTimer;
 
     Camera camera_front_right;
 
@@ -61,6 +64,7 @@ signals:
 private slots:
     void RunLoop();
     void VisionLoop();
+    void SlowLoop();
 };
 
 #endif // ROBOTMAIN_H
