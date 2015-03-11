@@ -4,18 +4,23 @@
 
 const int NetworkClient::port = 3141;
 
-NetworkClient::NetworkClient() : server(), socket() {
-
+NetworkClient::NetworkClient() : server(0), socket(0) {
     mThread = new QThread(this);
     this->moveToThread(mThread);
 
     mThread->start();
 
-    bool listening = server.listen(QHostAddress::Any, port);
-    if (!listening) qDebug() << "Server failed to start";
-    connect(&server, SIGNAL(newConnection()), this, SLOT(NewConnection()));
-
     connect(mThread, SIGNAL(finished()), mThread, SLOT(deleteLater()));
+
+    QMetaObject::invokeMethod(this, "Start");
+}
+
+void NetworkClient::Start() {
+    server = new QTcpServer(this);
+
+    bool listening = server->listen(QHostAddress::Any, port);
+    if (!listening) qDebug() << "Server failed to start";
+    connect(server, SIGNAL(newConnection()), this, SLOT(NewConnection()));
 }
 
 bool NetworkClient::IsConnected() {
@@ -24,7 +29,8 @@ bool NetworkClient::IsConnected() {
 
 void NetworkClient::NewConnection() {
     if (socket == 0 || !socket->isOpen()) {
-        socket = server.nextPendingConnection();
+        socket = server->nextPendingConnection();
+
         qDebug() << "Accepted Conenction from " << socket->localAddress().toString();
 
         connect(socket, SIGNAL(readyRead()), this, SLOT(DataReady()));
@@ -65,9 +71,11 @@ void NetworkClient::DataReady() {
 }
 
 NetworkClient::~NetworkClient() {
-    disconnect(&server, SIGNAL(newConnection()), this, SLOT(NewConnection()));
+    disconnect(server, SIGNAL(newConnection()), this, SLOT(NewConnection()));
 
-    server.close();
+    server->close();
+    delete server;
+
     socket->close();
     delete socket;
 

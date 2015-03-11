@@ -20,7 +20,7 @@ public:
     ~NetworkClient();
 
 private:
-    QTcpServer server;
+    QTcpServer *server;
     QTcpSocket *socket;
     QThread *mThread;
 
@@ -33,6 +33,8 @@ signals:
 public slots:
     void NewConnection();
     void SendData(QByteArray);
+
+    void Start();
 
 private slots:
     void SocketDisconnected();

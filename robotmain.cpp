@@ -7,7 +7,10 @@ RobotMain::RobotMain()
       networkClient(), networkData(),
       visionData(),
       timer(), visionTimer(), slowTimer(),
-      camera_front_right(0) {
+      camera_front_right(0)
+{
+    //networkClient.Start();
+
     //Connect signals and slots for network
     connect(&networkClient, SIGNAL(DataReceived(QByteArray)), &networkData, SLOT(ParseDataString(QByteArray)));
     connect(&networkData, SIGNAL(SendData(QByteArray)), &networkClient, SLOT(SendData(QByteArray)));
