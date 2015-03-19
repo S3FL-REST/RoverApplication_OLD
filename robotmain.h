@@ -50,6 +50,7 @@ private:
 
     QTimer timer;
     QTimer visionTimer;
+    QTimer visionSend;
     QTimer slowTimer;
 
     Camera camera_front_right;
@@ -64,6 +65,7 @@ signals:
 private slots:
     void RunLoop();
     void VisionLoop();
+    void VisionNetworkLoop();
     void SlowLoop();
 };
 

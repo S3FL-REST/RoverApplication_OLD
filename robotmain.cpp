@@ -6,7 +6,7 @@ RobotMain::RobotMain()
     : robotData(), robotSensors(),
       networkClient(), networkData(),
       visionData(),
-      timer(), visionTimer(), slowTimer(),
+      timer(), visionTimer(), visionSend(), slowTimer(),
       camera_front_right(0)
 {
     //networkClient.Start();
@@ -21,8 +21,11 @@ RobotMain::RobotMain()
     connect(&timer, SIGNAL(timeout()), this, SLOT(RunLoop()));
 
     //Set the vision timer interval and connect the timer to event for vision loop
-    visionTimer.setInterval(100);
+    visionTimer.setInterval(50);
     connect(&visionTimer, SIGNAL(timeout()), this, SLOT(VisionLoop()));
+
+    visionSend.setInterval(500);
+    connect(&visionSend, SIGNAL(timeout()), this, SLOT(VisionNetworkLoop()));
 
     //Set the slow timer interval and connect for periodic tasks
     slowTimer.setInterval(1000);
@@ -35,6 +38,7 @@ RobotMain::RobotMain()
 void RobotMain::StartRunLoop() {
     timer.start();
     visionTimer.start();
+    visionSend.start();
     slowTimer.start();
     cout << "Starting Main Run Loop" << endl;
 }
@@ -42,6 +46,7 @@ void RobotMain::StartRunLoop() {
 void RobotMain::StopRunLoop() {
     timer.stop();
     visionTimer.stop();
+    visionSend.stop();
     slowTimer.stop();
     cout << "Stopping Main Run Loop" << endl;
 }
@@ -165,7 +170,9 @@ void RobotMain::RunLoop() {
 
 void RobotMain::VisionLoop() {
     camera_front_right.CaptureImage();
+}
 
+void RobotMain::VisionNetworkLoop() {
     if (camera_front_right.HasNewImage())
         networkData.SendPicture(camera_front_right.GetCurrentImage());
 }
